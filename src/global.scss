@@ -24,6 +24,7 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import '~animate.css/animate.min.css';
 
 /**
  * Ionic Dark Mode
@@ -35,3 +36,16 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+.p-20 {
+  padding: 20px !important
+}
+
+.p-10 {
+  padding: 10px !important
+}
+
+.p-5 {
+  padding: 5px !important
+}

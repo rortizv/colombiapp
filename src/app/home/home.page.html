@@ -3,10 +3,39 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>ColombiApp - Home</ion-title>
+    <ion-title>ColombiApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <h1>HomePage</h1>
+<ion-content>
+  <ion-row class="animate__animated animate__fadeInLeftBig">
+    <ion-col class="no-padding">
+      <div class="p-20">
+        <h2 class="welcome">Bienvenido a <span class="welcome-col">ColombiApp</span></h2>
+        <ion-label>Explora fácilmente Colombia con nuestra App, desde información pública general hasta más específica y gratis.</ion-label>
+      </div>
+      <ion-img
+        src="../../assets/images/canocristales.jpg"
+        alt="Caño Cristales, Colombia"
+      ></ion-img>
+      <div class="p-20">
+        <ion-label>
+          <h2>Encuentra información detallada de Colombia</h2>
+          <p>Organizada por:</p>
+          <ul>
+            <li>Departamentos</li>
+            <li>Ciudades</li>
+            <li>Regiones</li>
+            <li>Aeropuertos</li>
+            <li>Presidentes</li>
+            <li>Estaciones de radio</li>
+            <li>Y mucho más...</li>
+          </ul>
+        </ion-label>
+      </div>
+      <div class="p-10">
+        <ion-button expand="block" routerLink="/about">¡Explora Colombia ya!</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-content>
