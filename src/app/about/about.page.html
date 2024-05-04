@@ -7,6 +7,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <h1>About page</h1>
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <ion-row>
+    <ion-col>
+      <h2>{{ colombiaInfo.name }}</h2>
+      <p>{{ colombiaInfo.description }}</p>
+      <p>Capital: {{ colombiaInfo.stateCapital }}</p>
+      <p>Surface: {{ colombiaInfo.surface }} km²</p>
+      <p>Population: {{ colombiaInfo.population }}</p>
+      <p>Languages: {{ colombiaInfo.languages.join(', ') }}</p>
+      <p>Time Zone: {{ colombiaInfo.timeZone }}</p>
+      <p>Currency: {{ colombiaInfo.currency }} ({{ colombiaInfo.currencyCode }})</p>
+      <p>ISO Code: {{ colombiaInfo.isoCode }}</p>
+      <p>Internet Domain: {{ colombiaInfo.internetDomain }}</p>
+      <p>Phone Prefix: {{ colombiaInfo.phonePrefix }}</p>
+      <p>Radio Prefix: {{ colombiaInfo.radioPrefix }}</p>
+      <p>Aircraft Prefix: {{ colombiaInfo.aircraftPrefix }}</p>
+      <p>Subregion: {{ colombiaInfo.subRegion }}</p>
+      <p>Region: {{ colombiaInfo.region }}</p>
+      <p>Borders: {{ colombiaInfo.borders.join(', ') }}</p>
+      <img *ngFor="let flag of colombiaInfo.flags" [src]="flag" alt="Colombia Flag">
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-row class="animate__animated animate__fadeInLeftBig">
+<ion-content class="animate__animated animate__fadeInLeftBig">
+  <ion-row>
     <ion-col class="no-padding">
       <div class="p-20">
         <h2 class="welcome">Bienvenido a <span class="welcome-col">ColombiApp</span></h2>
@@ -36,6 +36,24 @@
       <div class="p-10">
         <ion-button expand="block" routerLink="/about">¡Explora Colombia ya!</ion-button>
       </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{'Departamentos' | uppercase}}</ion-card-title>
+          <ion-card-subtitle>Descubre los</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          Sumérgete en los 32 departamentos de Colombia, su historia, geografía, economía, cultura y mucho más.
+        </ion-card-content>
+
+        <div class="p-10">
+          <ion-button fill="outline">Ver más</ion-button>
+        </div>
+      </ion-card>
     </ion-col>
   </ion-row>
 </ion-content>

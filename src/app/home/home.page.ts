@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonImg, IonButton, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonLabel } from '@ionic/angular/standalone';
+import { IonImg, IonButton, IonRow, IonCol, IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonLabel, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -23,7 +23,12 @@ import { RouterLink } from '@angular/router';
     IonCol,
     IonImg,
     IonButton,
-    RouterLink
+    RouterLink,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent
   ]
 })
 export class HomePage {
