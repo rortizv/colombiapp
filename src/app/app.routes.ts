@@ -15,7 +15,11 @@ export const routes: Routes = [
     loadComponent: () => import('./about/about.page').then( m => m.AboutPage)
   },
   {
+    path: 'regions',
+    loadComponent: () => import('./regions/regions.page').then( m => m.RegionsPage)
+  },
+  {
     path: '**',
     redirectTo: 'home',
-  }
+  },
 ];

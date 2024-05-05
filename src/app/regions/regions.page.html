@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ColombiApp - Regiones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
+  <span *ngIf="!isLoading">
+    <ion-card *ngFor="let region of regions">
+      <img alt="{{region.description}}" src="{{region.imageUrl}}" />
+      <ion-card-header>
+        <ion-card-title>{{region.name}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{region.description}}
+      </ion-card-content>
+    </ion-card>
+  </span>
+</ion-content>

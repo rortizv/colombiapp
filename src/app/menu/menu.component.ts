@@ -27,7 +27,8 @@ export class MenuComponent {
 
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Info de Colombia', url: '/about', icon: 'information-circle' }
+    { title: 'Info de Colombia', url: '/about', icon: 'information-circle' },
+    { title: 'Regiones', url: '/regions', icon: 'layers' }
   ];
 
   constructor(private router: Router) {

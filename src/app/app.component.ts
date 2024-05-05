@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, informationOutline, informationCircleOutline, homeOutline, homeSharp, informationCircleSharp } from 'ionicons/icons';
+import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, informationOutline, informationCircleOutline, homeOutline, homeSharp, informationCircleSharp, layersOutline } from 'ionicons/icons';
 import { MenuComponent } from './menu/menu.component';
 
 import { register } from 'swiper/element/bundle';
@@ -19,6 +19,6 @@ register();
 export class AppComponent {
 
   constructor() {
-    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, informationOutline, informationCircleOutline, homeOutline, homeSharp, informationCircleSharp });
+    addIcons({ mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, informationOutline, informationCircleOutline, homeOutline, homeSharp, informationCircleSharp, layersOutline });
   }
 }

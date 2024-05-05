@@ -14,7 +14,12 @@ export class ApicolombiaService {
   constructor(private http: HttpClient) { }
 
   getColombiaInfo(): Observable<ColombiaInfo> {
-    const url = `${this.apiUrl}Country/Colombia`;
+    const url = `${this.apiUrl}/Country/Colombia`;
+    return this.http.get<any>(url);
+  }
+
+  getRegions(): Observable<any> {
+    const url = `${this.apiUrl}/Region`;
     return this.http.get<any>(url);
   }
 

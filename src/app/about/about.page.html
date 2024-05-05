@@ -15,22 +15,23 @@
       </swiper-slide>
     </swiper-container>
     <ion-col class="p-20">
-      <h2>{{ colombiaInfo.name }}</h2>
+      <h1>{{ colombiaInfo.name }}</h1>
       <p>{{ colombiaInfo.description }}</p>
       <p>Capital: {{ colombiaInfo.stateCapital }}</p>
-      <p>Surface: {{ colombiaInfo.surface }} km²</p>
-      <p>Population: {{ colombiaInfo.population }}</p>
-      <p>Languages: {{ colombiaInfo.languages.join(', ') }}</p>
-      <p>Time Zone: {{ colombiaInfo.timeZone }}</p>
-      <p>Currency: {{ colombiaInfo.currency }} ({{ colombiaInfo.currencyCode }})</p>
-      <p>ISO Code: {{ colombiaInfo.isoCode }}</p>
-      <p>Internet Domain: {{ colombiaInfo.internetDomain }}</p>
-      <p>Phone Prefix: {{ colombiaInfo.phonePrefix }}</p>
-      <p>Radio Prefix: {{ colombiaInfo.radioPrefix }}</p>
-      <p>Aircraft Prefix: {{ colombiaInfo.aircraftPrefix }}</p>
+      <p>Superficie: {{ colombiaInfo.surface | number: '1.0-0' }} km²</p>
+      <p>Población: {{ colombiaInfo.population | number: '1.0-0' }}</p>
+      <p>Idiomas: {{ colombiaInfo.languages.join(', ') }}</p>
+      <p>Zona Horaria: {{ colombiaInfo.timeZone }}</p>
+      <p>Moneda: {{ colombiaInfo.currency }} ({{ colombiaInfo.currencyCode }})</p>
+      <p>Código ISO: {{ colombiaInfo.isoCode }}</p>
+      <p>Dominio de internet: {{ colombiaInfo.internetDomain }}</p>
+      <p>Prefijo telefónico: {{ colombiaInfo.phonePrefix }}</p>
+      <p>Prefijo radio: {{ colombiaInfo.radioPrefix }}</p>
+      <p>Prefijo aeronaves: {{ colombiaInfo.aircraftPrefix }}</p>
       <p>Subregion: {{ colombiaInfo.subRegion }}</p>
       <p>Region: {{ colombiaInfo.region }}</p>
-      <p>Borders: {{ colombiaInfo.borders.join(', ') }}</p>
+      <p>Límites: {{ colombiaInfo.borders.join(', ') }}</p>
+      <p>Bandera</p>
       <img *ngFor="let flag of colombiaInfo.flags" [src]="flag" alt="Colombia Flag">
     </ion-col>
   </ion-row>
