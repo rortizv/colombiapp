@@ -6,6 +6,9 @@ import { addIcons } from 'ionicons';
 import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutline, heartSharp, archiveOutline, archiveSharp, trashOutline, trashSharp, warningOutline, warningSharp, bookmarkOutline, bookmarkSharp, informationOutline, informationCircleOutline, homeOutline, homeSharp, informationCircleSharp } from 'ionicons/icons';
 import { MenuComponent } from './menu/menu.component';
 
+import { register } from 'swiper/element/bundle';
+register();
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

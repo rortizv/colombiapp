@@ -9,6 +9,11 @@
 
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
   <ion-row>
+    <swiper-container [modules]="swiperModules" class="swiper-container">
+      <swiper-slide *ngFor="let image of slides">
+        <img [src]="image.path" alt="Colombia">
+      </swiper-slide>
+    </swiper-container>
     <ion-col>
       <h2>{{ colombiaInfo.name }}</h2>
       <p>{{ colombiaInfo.description }}</p>

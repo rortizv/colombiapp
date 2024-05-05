@@ -1,16 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonRow, IonCol } from '@ionic/angular/standalone';
 import { ColombiaInfo } from '../interfaces/colombia.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
 import { Subscription } from 'rxjs';
+import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     IonButtons,
     IonContent,
@@ -25,6 +27,26 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class AboutPage implements OnInit, OnDestroy {
+
+  swiperModules = [IonicSlides];
+  slides = [
+    {
+      name: 'about1',
+      path: 'assets/images/about1.png',
+    },
+    {
+      name: 'about2',
+      path: 'assets/images/about2.png',
+    },
+    {
+      name: 'about3',
+      path: 'assets/images/about3.png',
+    },
+    {
+      name: 'about4',
+      path: 'assets/images/about4.png',
+    },
+  ];
 
   public colombiaInfo: ColombiaInfo = {
     id: 0,
