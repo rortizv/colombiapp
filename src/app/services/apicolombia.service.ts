@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ColombiaInfo } from '../interfaces/colombia.interface';
+import { Region } from '../interfaces/region.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,11 @@ export class ApicolombiaService {
 
   getRegions(): Observable<any> {
     const url = `${this.apiUrl}/Region`;
+    return this.http.get<any>(url);
+  }
+
+  getDepartmentsByRegion(regionId: number): Observable<any> {
+    const url = `${this.apiUrl}/Region/${regionId}/departments`;
     return this.http.get<any>(url);
   }
 

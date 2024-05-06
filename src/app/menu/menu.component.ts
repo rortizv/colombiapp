@@ -28,7 +28,8 @@ export class MenuComponent {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Info de Colombia', url: '/about', icon: 'information-circle' },
-    { title: 'Regiones', url: '/regions', icon: 'layers' }
+    { title: 'Regiones', url: '/regions', icon: 'layers' },
+    { title: 'Departamentos', url: '/departments', icon: 'grid' }
   ];
 
   constructor(private router: Router) {

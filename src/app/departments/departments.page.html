@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>ColombiApp - Departamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
+  <span *ngIf="!isLoading">
+    <h1>departamentos page works</h1>
+  </span>
+</ion-content>
