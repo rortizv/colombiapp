@@ -11,3 +11,4 @@ Steps to run project in local browser:
 4. Run in terminal: `npm i` to install node modules.
 5. Run project with: `ionic serve`
 6. Application will open in browser at `http://localhost:8100`
+7. Since the app was designed for mobile only, it is recommended to try running on browser, opening the Dev Tools and changing the view to mobile for a correct user experience.
