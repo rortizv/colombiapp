@@ -42,16 +42,16 @@
     <ion-col>
       <ion-card>
         <ion-card-header>
-          <ion-card-title>{{'Departamentos' | uppercase}}</ion-card-title>
-          <ion-card-subtitle>Descubre los</ion-card-subtitle>
+          <ion-card-title>{{'Regiones' | uppercase}}</ion-card-title>
+          <!-- <ion-card-subtitle>Descubre los</ion-card-subtitle> -->
         </ion-card-header>
 
         <ion-card-content>
-          Sumérgete en los 32 departamentos de Colombia, su historia, geografía, economía, cultura y mucho más.
+          Descubre las 6 regiones de Colombia, su historia, geografía, economía, cultura y mucho más.
         </ion-card-content>
 
         <div class="p-10">
-          <ion-button fill="outline">Ver más</ion-button>
+          <ion-button fill="outline" [routerLink]="['/regions']" routerLinkActive="router-link-active" >Ver más</ion-button>
         </div>
       </ion-card>
     </ion-col>
