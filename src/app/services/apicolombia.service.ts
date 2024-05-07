@@ -38,6 +38,11 @@ export class ApicolombiaService {
     return this.http.get<City[]>(url);
   }
 
+  searchCityByName(search: string): Observable<City[]> {
+    const url = `${this.apiUrl}/City/search/${search}`;
+    return this.http.get<City[]>(url);
+  }
+
   getCityById(cityId: number): Observable<City> {
     const url = `${this.apiUrl}/City/${cityId}`;
     return this.http.get<City>(url);

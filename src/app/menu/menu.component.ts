@@ -29,7 +29,8 @@ export class MenuComponent {
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Info de Colombia', url: '/about', icon: 'information-circle' },
     { title: 'Regiones', url: '/regions', icon: 'layers' },
-    { title: 'Departamentos', url: '/departments', icon: 'grid' }
+    { title: 'Departamentos', url: '/departments', icon: 'grid' },
+    { title: 'Ciudades', url: '/cities', icon: 'business' }
   ];
 
   constructor(private router: Router) {
