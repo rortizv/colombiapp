@@ -35,10 +35,6 @@ export class AboutPage implements OnInit, OnDestroy {
       path: 'assets/images/about1.png',
     },
     {
-      name: 'about2',
-      path: 'assets/images/about2.png',
-    },
-    {
       name: 'about3',
       path: 'assets/images/about3.png',
     },

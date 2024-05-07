@@ -3,13 +3,48 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>ColombiApp - Departamentos</ion-title>
+    <ion-title>Departamentos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
   <ion-spinner *ngIf="isLoading"></ion-spinner>
   <span *ngIf="!isLoading">
-    <h1>departamentos page works</h1>
+    <ion-searchbar show-clear-button="focus" placeholder="Buscar Departamento..." (ionInput)="searchDepartment($event)"></ion-searchbar>
+    <ion-card *ngFor="let department of filteredDepartments">
+      <img alt="{{department.description}}" src="{{department.imageUrl}}" />
+      <ion-card-header>
+        <ion-card-title>{{department.name}}</ion-card-title>
+        <ion-card-subtitle>Capital: {{department.capitalCity}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <ion-label>Descripción</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">{{department.description}}</div>
+          </ion-accordion>
+        </ion-accordion-group>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Prefijo telefónico</ion-label>
+              <ion-note slot="end">{{department.phonePrefix}}</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label>Población</ion-label>
+              <ion-note slot="end">{{department.population | number: '1.0-0'}}</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label>Superficie</ion-label>
+              <ion-note slot="end">{{department.surface | number: '1.0-0'}} km²</ion-note>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
   </span>
 </ion-content>

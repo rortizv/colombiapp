@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, LoadingController, IonSpinner, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
@@ -36,7 +36,7 @@ import { Department, DepartmentsByRegionResponse } from '../interfaces/departmen
     IonLabel
   ]
 })
-export class RegionsPage implements OnInit {
+export class RegionsPage implements OnInit, OnDestroy {
 
   regions: Region[] = [];
   getRegionsSubscription: Subscription = new Subscription();
@@ -125,6 +125,11 @@ export class RegionsPage implements OnInit {
         loading.dismiss();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.getRegionsSubscription.unsubscribe();
+    this.getDepartmentsByRegionSubscription.unsubscribe();
   }
 
 }

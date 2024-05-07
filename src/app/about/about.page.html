@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>ColombiApp - Acerca de</ion-title>
+    <ion-title>Acerca de</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,21 +17,80 @@
     <ion-col class="p-20">
       <h1>{{ colombiaInfo.name }}</h1>
       <p>{{ colombiaInfo.description }}</p>
-      <p>Capital: {{ colombiaInfo.stateCapital }}</p>
-      <p>Superficie: {{ colombiaInfo.surface | number: '1.0-0' }} km²</p>
-      <p>Población: {{ colombiaInfo.population | number: '1.0-0' }}</p>
-      <p>Idiomas: {{ colombiaInfo.languages.join(', ') }}</p>
-      <p>Zona Horaria: {{ colombiaInfo.timeZone }}</p>
-      <p>Moneda: {{ colombiaInfo.currency }} ({{ colombiaInfo.currencyCode }})</p>
-      <p>Código ISO: {{ colombiaInfo.isoCode }}</p>
-      <p>Dominio de internet: {{ colombiaInfo.internetDomain }}</p>
-      <p>Prefijo telefónico: {{ colombiaInfo.phonePrefix }}</p>
-      <p>Prefijo radio: {{ colombiaInfo.radioPrefix }}</p>
-      <p>Prefijo aeronaves: {{ colombiaInfo.aircraftPrefix }}</p>
-      <p>Subregion: {{ colombiaInfo.subRegion }}</p>
-      <p>Region: {{ colombiaInfo.region }}</p>
-      <p>Límites: {{ colombiaInfo.borders.join(', ') }}</p>
-      <p>Bandera</p>
+
+      <ion-item>
+        <ion-label>Capital</ion-label>
+        <ion-note slot="end">{{colombiaInfo.stateCapital}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Superficie</ion-label>
+        <ion-note slot="end">{{colombiaInfo.surface | number: '1.0-0'}} km²</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Población</ion-label>
+        <ion-note slot="end">{{colombiaInfo.population | number: '1.0-0'}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Idiomas</ion-label>
+        <ion-note slot="end">{{colombiaInfo.languages.join(', ')}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Zona Horaria</ion-label>
+        <ion-note slot="end">{{colombiaInfo.timeZone}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Moneda</ion-label>
+        <ion-note slot="end">{{colombiaInfo.currency}} ({{colombiaInfo.currencyCode}})</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Código ISO</ion-label>
+        <ion-note slot="end">{{colombiaInfo.isoCode}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Dominio de internet</ion-label>
+        <ion-note slot="end">{{colombiaInfo.internetDomain}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prefijo telefónico</ion-label>
+        <ion-note slot="end">{{colombiaInfo.phonePrefix}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prefijo radio</ion-label>
+        <ion-note slot="end">{{colombiaInfo.radioPrefix}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prefijo aeronaves</ion-label>
+        <ion-note slot="end">{{colombiaInfo.aircraftPrefix}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Subregion</ion-label>
+        <ion-note slot="end">{{colombiaInfo.subRegion}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Region</ion-label>
+        <ion-note slot="end">{{colombiaInfo.region}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Límites</ion-label>
+        <ion-note slot="end">{{colombiaInfo.borders.join(', ')}}</ion-note>
+      </ion-item>
+
+      <ion-item no-lines>
+        <ion-label>Bandera</ion-label>
+      </ion-item>
       <img *ngFor="let flag of colombiaInfo.flags" [src]="flag" alt="Colombia Flag">
     </ion-col>
   </ion-row>
