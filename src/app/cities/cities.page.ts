@@ -58,11 +58,11 @@ export class CitiesPage implements OnInit, OnDestroy {
     this.searchCityByNameSubscription = this.apiColombiaService.searchCityByName(searchValue)
       .subscribe({
         next: (data: City[]) => {
-          console.log('Ciudades:', data);
           this.filteredCities = data;
         },
         error: (error: any) => {
           this.toolsService.presentToast('No hay ciudades que coincidan con su búsqueda.', 'toast-error');
+          this.filteredCities = [];
           this.isLoading = false;
           loading.dismiss();
         },
