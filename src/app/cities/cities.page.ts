@@ -2,9 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonSpinner, LoadingController, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { Subscription, Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
 import { City } from '../interfaces/city.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
-import { Subscription } from 'rxjs';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-cities',
@@ -15,53 +18,63 @@ import { Subscription } from 'rxjs';
 })
 export class CitiesPage implements OnInit, OnDestroy {
 
-  isLoading: boolean = false;
-  cities: City[] = [];
-  filteredCities: City[] = [];
-  searchCityByNameSubscription: Subscription = new Subscription();
+  public isLoading: boolean = false;
+  public searchTerm: string = '';
+  public filteredCities: City[] = [];
+  public searchCityByNameSubscription: Subscription = new Subscription();
+  private searchValue$ = new Subject<string>();
+  private searchSubscription: Subscription | undefined;
 
   constructor(private apiColombiaService: ApicolombiaService,
-              private loadingController: LoadingController) { }
+    private toolsService: ToolsService,
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
     console.log('CitiesPage ngOnInit');
+    this.searchSubscription = this.searchValue$
+      .pipe(debounceTime(500))
+      .subscribe(searchValue => {
+        this.filterCities(searchValue);
+      });
   }
 
   ngOnDestroy() {
     this.searchCityByNameSubscription.unsubscribe();
+    this.searchSubscription?.unsubscribe();
   }
 
-  async filterCities(event: any) {
-    // this.isLoading = true;
-    // const loading = await this.loadingController.create({
-    //   message: 'Cargando C...',
-    // });
-    // await loading.present();
-
-    const searchValue = event.target.value;
-
-    if (searchValue === '' || searchValue === null || searchValue === undefined || searchValue.length < 4) {
+  async filterCities(searchValue: string) {
+    if (!searchValue || searchValue.length < 4) {
       this.filteredCities = [];
-      console.log(searchValue)
-      //loading.dismiss();
       return;
     }
-    this.searchCityByNameSubscription = this.apiColombiaService.searchCityByName(searchValue).subscribe({
-      next: (data: City[]) => {
-        console.log('Ciudades:', data);
-        this.cities = data;
-        this.filteredCities = data;
-        this.isLoading = true;
-      },
-      error: (error: any) => {
-        console.error('Error al buscar ciudades:', error);
-        this.isLoading = false;
-      },
-      complete: () => {
-        this.isLoading = false;
-        //loading.dismiss();
-      }
+
+    this.isLoading = true;
+    const loading = await this.loadingController.create({
+      message: 'Buscando ciudades...',
     });
+    await loading.present();
+
+    this.searchCityByNameSubscription = this.apiColombiaService.searchCityByName(searchValue)
+      .subscribe({
+        next: (data: City[]) => {
+          console.log('Ciudades:', data);
+          this.filteredCities = data;
+        },
+        error: (error: any) => {
+          this.toolsService.presentToast('No hay ciudades que coincidan con su búsqueda.', 'toast-error');
+          this.isLoading = false;
+          loading.dismiss();
+        },
+        complete: () => {
+          this.isLoading = false;
+          loading.dismiss();
+        }
+      });
+  }
+
+  onSearchInput(event: any) {
+    this.searchValue$.next(event.target.value);
   }
 
   openCity(city: City) {

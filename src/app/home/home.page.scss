@@ -10,3 +10,45 @@
     font-weight: 800;
   }
 }
+
+.regions-card {
+  background-image: url('../../assets/images/regiones-de-colombia.png');
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .card-content {
+    color: #000000;
+  }
+}
+
+.city-card {
+  background-image: url('../../assets/images/ciudades-de-colombia.png');
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .card-content {
+    color: #000000;
+  }
+}

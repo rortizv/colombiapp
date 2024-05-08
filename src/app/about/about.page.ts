@@ -28,8 +28,8 @@ import { IonicSlides } from '@ionic/angular';
 })
 export class AboutPage implements OnInit, OnDestroy {
 
-  swiperModules = [IonicSlides];
-  slides = [
+  public swiperModules = [IonicSlides];
+  public slides = [
     {
       name: 'about1',
       path: 'assets/images/about1.png',
@@ -67,7 +67,7 @@ export class AboutPage implements OnInit, OnDestroy {
     flags: [],
   };
 
-  getColombiaInfoSubscription: Subscription = new Subscription();
+  public getColombiaInfoSubscription: Subscription = new Subscription();
 
   constructor(private apiColombiaService: ApicolombiaService) { }
 

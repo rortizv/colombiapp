@@ -15,8 +15,8 @@
         <ion-label>Explora fácilmente Colombia con nuestra App, desde información pública general hasta más específica y gratis.</ion-label>
       </div>
       <ion-img
-        src="../../assets/images/canocristales.jpg"
-        alt="Caño Cristales, Colombia"
+        src="../../assets/images/collage.png"
+        alt="Collage Colombia"
       ></ion-img>
       <div class="p-20">
         <ion-label>
@@ -40,18 +40,32 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-card>
+      <ion-card class="regions-card">
         <ion-card-header>
           <ion-card-title>{{'Regiones' | uppercase}}</ion-card-title>
           <!-- <ion-card-subtitle>Descubre los</ion-card-subtitle> -->
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content class="card-content">
           Descubre las 6 regiones de Colombia, su historia, geografía, economía, cultura y mucho más.
         </ion-card-content>
 
         <div class="p-10">
-          <ion-button fill="outline" [routerLink]="['/regions']" routerLinkActive="router-link-active" >Ver más</ion-button>
+          <ion-button color="primary" [routerLink]="['/regions']" routerLinkActive="router-link-active" >Ver más</ion-button>
+        </div>
+      </ion-card>
+      <ion-card class="city-card">
+        <ion-card-header>
+          <ion-card-title>{{'Ciudades' | uppercase}}</ion-card-title>
+          <!-- <ion-card-subtitle>Descubre los</ion-card-subtitle> -->
+        </ion-card-header>
+
+        <ion-card-content class="card-content">
+          Conoce ciudades y pueblitos de Colombia, cada uno con su propia historia, paisajes impresionantes, sabores únicos y secretos por descubrir.
+        </ion-card-content>
+
+        <div class="p-10">
+          <ion-button color="primary" [routerLink]="['/cities']" routerLinkActive="router-link-active" >Ver más</ion-button>
         </div>
       </ion-card>
     </ion-col>

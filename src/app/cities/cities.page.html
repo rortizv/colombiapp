@@ -8,9 +8,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
-  <ion-spinner *ngIf="isLoading"></ion-spinner>
   <span *ngIf="!isLoading">
-    <ion-searchbar show-clear-button="focus" placeholder="Buscar Ciudad..." (ionInput)="filterCities($event)"></ion-searchbar>
+    <ion-searchbar
+      #searchBar
+      show-clear-button="focus"
+      placeholder="Buscar Ciudad..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchInput($event)">
+    </ion-searchbar>
     <ion-list>
       <ion-item *ngFor="let city of filteredCities" (click)="openCity(city)">
         <ion-label>{{city.name}}</ion-label>

@@ -19,18 +19,18 @@ import { City } from '../interfaces/city.interface';
 })
 export class DepartmentsPage implements OnInit, OnDestroy {
 
-  getCitiesSubscription: Subscription = new Subscription();
-  getCityByIdSubscription: Subscription = new Subscription();
-  getDepartmentsSubscription: Subscription = new Subscription();
-  getDepartmentsByRegionSubscription: Subscription = new Subscription();
+  private getCitiesSubscription:              Subscription = new Subscription();
+  private getCityByIdSubscription:            Subscription = new Subscription();
+  private getDepartmentsSubscription:         Subscription = new Subscription();
+  private getDepartmentsByRegionSubscription: Subscription = new Subscription();
 
-  departments: Department[] = [];
-  cities: City[] = [];
-  isLoading: boolean = false;
-  filteredDepartments: Department[] = [];
+  public departments: Department[] = [];
+  public filteredDepartments: Department[] = [];
+  public cities: City[] = [];
+  public isLoading: boolean = false;
 
   constructor(private apiColombiaService: ApicolombiaService,
-    private loadingController: LoadingController) { }
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.getDepartments();
@@ -52,7 +52,6 @@ export class DepartmentsPage implements OnInit, OnDestroy {
 
     this.getDepartmentsSubscription = this.apiColombiaService.getDepartments().subscribe({
       next: (data: any) => {
-        console.log('Departamentos:', data);
         this.departments = data;
         this.filteredDepartments = data;
         this.setCities();
