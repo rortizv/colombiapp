@@ -49,3 +49,8 @@
 .p-5 {
   padding: 5px !important
 }
+
+.toast-error {
+  --background: var(--ion-color-danger);
+  --color: #FFFFFF;
+}

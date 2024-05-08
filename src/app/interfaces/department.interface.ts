@@ -10,18 +10,20 @@ export interface Department {
   name:                   string;
   description:            string;
   cityCapitalId:          number;
+  capitalCity?:            string;
   municipalities:         number;
+  imageUrl:               string;
   surface:                number;
   population:             number;
   phonePrefix:            string;
   countryId:              number;
-  cityCapital:            null;
-  country:                null;
-  cities:                 null;
+  cityCapital:            string;
+  country:                any;
+  cities:                 any;
   regionId:               number;
-  region:                 null;
-  naturalAreas:           null;
-  maps:                   null;
-  indigenousReservations: null;
-  airports:               null;
+  region:                 any;
+  naturalAreas:           any;
+  maps:                   any;
+  indigenousReservations: any;
+  airports:               any;
 }
