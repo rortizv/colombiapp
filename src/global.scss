@@ -50,6 +50,14 @@
   padding: 5px !important
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.size-16 {
+  font-size: 1.5rem;
+}
+
 .toast-error {
   --background: var(--ion-color-danger);
   --color: #FFFFFF;
