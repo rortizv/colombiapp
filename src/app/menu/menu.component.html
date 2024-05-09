@@ -1,7 +1,7 @@
 <ion-menu contentId="main-content">
   <ion-content>
     <ion-list id="inbox-list">
-      <ion-list-header class="menu-title">Menu</ion-list-header>
+      <ion-list-header mode="md" class="menu-title bold size-16">ColombiApp</ion-list-header>
       <ion-menu-toggle auto-hide="false" *ngFor="let page of appPages; let i = index">
         <ion-item routerDirection="root" lines="none" detail="false" (click)="navigate(page.url)">
           <ion-icon aria-hidden="true" slot="start" [ios]="page.icon + '-outline'" [md]="page.icon + '-sharp'"></ion-icon>
