@@ -1,5 +1,8 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
+  <ion-row *ngIf="isDesktop" class="allCenterFlex">
+    <h1 class="big">Para una mejor experiencia de usuario con <b>ColombiApp</b>, te sugerimos verla en tu celular.  También puedes verla en tu navegador de escritorio, abriendo las Dev Tools presionando la tecla F12</h1>
+  </ion-row>
+  <ion-split-pane contentId="main-content" *ngIf="!isDesktop">
     <app-menu></app-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
