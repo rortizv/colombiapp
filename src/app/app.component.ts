@@ -7,7 +7,10 @@ import { mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, heartOutlin
 import { MenuComponent } from './menu/menu.component';
 
 import { register } from 'swiper/element/bundle';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
 register();
+injectSpeedInsights();
 
 @Component({
   selector: 'app-root',
