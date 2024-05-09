@@ -27,6 +27,10 @@ export const routes: Routes = [
     loadComponent: () => import('./cities/cities.page').then( m => m.CitiesPage)
   },
   {
+    path: 'city-detail',
+    loadComponent: () => import('./city-detail/city-detail.page').then( m => m.CityDetailPage)
+  },
+  {
     path: '**',
     redirectTo: 'home',
   }

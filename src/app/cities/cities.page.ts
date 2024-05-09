@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonSpinner, LoadingController, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -27,7 +28,8 @@ export class CitiesPage implements OnInit, OnDestroy {
 
   constructor(private apiColombiaService: ApicolombiaService,
     private toolsService: ToolsService,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController,
+    private router: Router) { }
 
   ngOnInit() {
     console.log('CitiesPage ngOnInit');
@@ -78,7 +80,7 @@ export class CitiesPage implements OnInit, OnDestroy {
   }
 
   openCity(city: City) {
-    console.log('Open City:', city);
+    this.router.navigate(['/city-detail'], { state: { city } })
   }
 
 }
