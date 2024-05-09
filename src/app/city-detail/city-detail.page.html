@@ -1,35 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button (click)="goBack()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{city.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-content>
-      <ion-accordion-group>
-        <ion-accordion value="first">
-          <ion-item slot="header" color="light">
-            <ion-label>Descripción</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">{{city.description}}</div>
-        </ion-accordion>
-      </ion-accordion-group>
-      <ion-item>
-        <ion-label>Población</ion-label>
-        <ion-note slot="end">{{city.population | number: '1.0-0'}}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Código postal</ion-label>
-        <ion-note slot="end">{{city.postalCode}}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Superficie</ion-label>
-        <ion-note slot="end">{{city.surface | number: '1.0-0'}} km²</ion-note>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  <ion-list class=" mt-10">
+    <ion-label class="ion-margin-start">Descripción</ion-label>
+    <ion-item>
+      <ion-note slot="start" class="description">{{city.description}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Población</ion-label>
+      <ion-note slot="end">{{city.population | number: '1.0-0'}} habitantes.</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Código postal</ion-label>
+      <ion-note slot="end">{{city.postalCode}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Superficie</ion-label>
+      <ion-note slot="end">{{city.surface | number: '1.0-0'}} km²</ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
