@@ -8,6 +8,7 @@ import { ColombiaInfo } from '../interfaces/colombia.interface';
 import { Department, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
+import { President } from '../interfaces/president.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -51,6 +52,11 @@ export class ApicolombiaService {
   getDepartmentsByRegion(regionId: number): Observable<DepartmentsByRegionResponse> {
     const url = `${this.apiUrl}/Region/${regionId}/departments`;
     return this.http.get<DepartmentsByRegionResponse>(url);
+  }
+
+  getPresidents(): Observable<President[]> {
+    const url = `${this.apiUrl}/President`;
+    return this.http.get<President[]>(url);
   }
 
 }

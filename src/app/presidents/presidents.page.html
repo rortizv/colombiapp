@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Presidentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <span *ngIf="!isLoading">
+    <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)" class="searchbar"></ion-searchbar>
+    <ion-card *ngFor="let president of filteredPresidents" class="card">
+      <!-- <img alt="{{president.fullName}}" src="{{president.image}}" /> -->
+      <img alt="{{ president.fullName }}" [src]="president.image || '../../assets/images/no-image.png'" />
+      <ion-card-header>
+        <ion-card-title>{{president.fullName}}</ion-card-title>
+        <ion-card-subtitle>Partido político: {{president.politicalParty}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <ion-label>Descripción</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">{{president.description}}</div>
+          </ion-accordion>
+        </ion-accordion-group>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>Inicio periodo</ion-label>
+              <ion-note slot="end">{{president.startPeriodDate}}</ion-note>
+            </ion-item>
+            <ion-item>
+              <ion-label>Fin periodo</ion-label>
+              <ion-note slot="end">{{president.endPeriodDate}}</ion-note>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </span>
+</ion-content>

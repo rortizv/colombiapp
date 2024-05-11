@@ -66,3 +66,13 @@
 .mt-10 {
   margin-top: 10px !important
 }
+
+.searchbar {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.card {
+  margin-top: 60px;
+}
