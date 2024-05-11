@@ -52,3 +52,21 @@
     color: #000000;
   }
 }
+
+.flag-row {
+  height: 5px;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  .yellow {
+    background-color: yellow;
+  }
+
+  .blue {
+    background-color: blue;
+  }
+
+  .red {
+    background-color: red;
+  }
+}

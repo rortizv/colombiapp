@@ -8,10 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
-  <ion-spinner *ngIf="isLoading"></ion-spinner>
   <span *ngIf="!isLoading">
-    <ion-searchbar show-clear-button="focus" placeholder="Buscar Departamento..." (ionInput)="searchDepartment($event)"></ion-searchbar>
-    <ion-card *ngFor="let department of filteredDepartments">
+    <ion-searchbar show-clear-button="focus" placeholder="Buscar Departamento..." (ionInput)="searchDepartment($event)" class="searchbar"></ion-searchbar>
+    <ion-card *ngFor="let department of filteredDepartments" class="card">
       <img alt="{{department.description}}" src="{{department.imageUrl}}" />
       <ion-card-header>
         <ion-card-title>{{department.name}}</ion-card-title>

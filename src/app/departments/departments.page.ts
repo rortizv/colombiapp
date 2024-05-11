@@ -6,7 +6,6 @@ import { Observable, Subscription, forkJoin } from 'rxjs';
 
 import { ApicolombiaService } from '../services/apicolombia.service';
 
-import { Region } from '../interfaces/region.interface';
 import { Department } from '../interfaces/department.interface';
 import { City } from '../interfaces/city.interface';
 
@@ -66,49 +65,6 @@ export class DepartmentsPage implements OnInit, OnDestroy {
       }
     });
   }
-
-  async getCityById(cityId: number) {
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: 'Cargando Ciudades...',
-    });
-    await loading.present();
-
-    this.getCityByIdSubscription = this.apiColombiaService.getCityById(cityId).subscribe({
-      next: (data: City) => {
-        this.setCities();
-        this.isLoading = false;
-        loading.dismiss();
-      },
-      error: (error: any) => {
-        console.error('Error cargando Ciudad por Id:', error);
-        this.isLoading = false;
-        loading.dismiss();
-      }
-    });
-  }
-
-  async getDepartmentsByRegion(region: Region) {
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: 'Cargando Departamentos por Region...',
-    });
-    await loading.present();
-
-    this.getDepartmentsByRegionSubscription = this.apiColombiaService.getDepartmentsByRegion(region.id).subscribe({
-      next: (data: any) => {
-
-        loading.dismiss();
-        this.isLoading = false;
-      },
-      error: (error: any) => {
-        console.error('Error cargando Departamentos por Region:', error);
-        loading.dismiss();
-        this.isLoading = false;
-      }
-    });
-  }
-
 
   async setCities() {
     const observables: Observable<any>[] = [];

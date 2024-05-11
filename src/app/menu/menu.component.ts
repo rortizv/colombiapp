@@ -30,7 +30,8 @@ export class MenuComponent {
     { title: 'Info de Colombia', url: '/about', icon: 'information-circle' },
     { title: 'Regiones', url: '/regions', icon: 'layers' },
     { title: 'Departamentos', url: '/departments', icon: 'grid' },
-    { title: 'Ciudades', url: '/cities', icon: 'business' }
+    { title: 'Ciudades', url: '/cities', icon: 'business' },
+    { title: 'Presidentes', url: '/presidents', icon: 'man'}
   ];
 
   constructor(private router: Router) {
