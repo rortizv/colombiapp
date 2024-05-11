@@ -16,7 +16,7 @@
     </swiper-container>
     <ion-col class="p-20">
       <h1>{{ colombiaInfo.name }}</h1>
-      <p>{{ colombiaInfo.description }}</p>
+      <p class="text-justify">{{ colombiaInfo.description }}</p>
 
       <ion-item>
         <ion-label>Capital</ion-label>
@@ -88,7 +88,7 @@
         <ion-note slot="end">{{colombiaInfo.borders.join(', ')}}</ion-note>
       </ion-item>
 
-      <ion-item no-lines>
+      <ion-item lines="none">
         <ion-label>Bandera</ion-label>
       </ion-item>
       <img *ngFor="let flag of colombiaInfo.flags" [src]="flag" alt="Colombia Flag">

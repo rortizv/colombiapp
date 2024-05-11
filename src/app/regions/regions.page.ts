@@ -55,7 +55,7 @@ export class RegionsPage implements OnInit, OnDestroy {
   async getRegions() {
     this.isLoading = true;
     const loading = await this.loadingController.create({
-      message: 'Loading Regions...',
+      message: 'Cargando Regiones...',
     });
     await loading.present();
 
@@ -67,7 +67,7 @@ export class RegionsPage implements OnInit, OnDestroy {
         loading.dismiss();
       },
       error: (error: any) => {
-        console.error('Error fetching Regions info:', error);
+        console.error('Error cargando info de Regiones', error);
         this.isLoading = false;
         loading.dismiss();
       }
@@ -109,7 +109,7 @@ export class RegionsPage implements OnInit, OnDestroy {
   async getDepartmentsByRegion(regionId: number) {
     this.isLoading = true;
     const loading = await this.loadingController.create({
-      message: 'Loading Departments...',
+      message: 'Cargando Departamentos...',
     });
     await loading.present();
 
@@ -120,7 +120,7 @@ export class RegionsPage implements OnInit, OnDestroy {
         loading.dismiss();
       },
       error: (error: any) => {
-        console.error('Error fetching Departments info:', error);
+        console.error('Error cargando info de Departamentos', error);
         this.isLoading = false;
         loading.dismiss();
       }
