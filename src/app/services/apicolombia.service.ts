@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { ColombiaInfo } from '../interfaces/colombia.interface';
-import { Department, DepartmentsByRegionResponse } from '../interfaces/department.interface';
+import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
 import { President } from '../interfaces/president.interface';
@@ -32,6 +32,11 @@ export class ApicolombiaService {
   getDepartments(): Observable<Department[]> {
     const url = `${this.apiUrl}/Department`;
     return this.http.get<Department[]>(url);
+  }
+
+  getDepartmentById(departmentId: number): Observable<DepartmentDetail> {
+    const url = `${this.apiUrl}/Department/${departmentId}`;
+    return this.http.get<DepartmentDetail>(url);
   }
 
   getCities(): Observable<City[]> {

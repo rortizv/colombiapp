@@ -14,6 +14,7 @@ Steps to run project in local browser:
 7. Since the app was designed for mobile only, it is recommended to try running on browser, opening the Dev Tools and changing the view to mobile for a correct user experience.
 
 
+
 Do you want to contribute to this project?
 
 Easy as following these steps:

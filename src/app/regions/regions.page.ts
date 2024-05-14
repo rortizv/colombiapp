@@ -8,6 +8,7 @@ import { ApicolombiaService } from '../services/apicolombia.service';
 
 import { Region } from '../interfaces/region.interface';
 import { Department, DepartmentsByRegionResponse } from '../interfaces/department.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regions',
@@ -46,10 +47,17 @@ export class RegionsPage implements OnInit, OnDestroy {
   departments: Department[] = [];
 
   constructor(private apiColombiaService: ApicolombiaService,
-              private loadingController: LoadingController) { }
+              private loadingController: LoadingController,
+              private router: Router) { }
 
   ngOnInit() {
     this.getRegions();
+  }
+
+  ngOnDestroy() {
+    this.isModalOpen = false;
+    this.getRegionsSubscription.unsubscribe();
+    this.getDepartmentsByRegionSubscription.unsubscribe();
   }
 
   async getRegions() {
@@ -98,14 +106,6 @@ export class RegionsPage implements OnInit, OnDestroy {
     });
   }
 
-  openDepartmentsByRegionModal(isOpen: boolean, region?: Region) {
-    this.isModalOpen = isOpen;
-
-    if (isOpen && region) {
-      this.getDepartmentsByRegion(region.id);
-    }
-  }
-
   async getDepartmentsByRegion(regionId: number) {
     this.isLoading = true;
     const loading = await this.loadingController.create({
@@ -127,9 +127,19 @@ export class RegionsPage implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    this.getRegionsSubscription.unsubscribe();
-    this.getDepartmentsByRegionSubscription.unsubscribe();
+  openDepartment(department: Department) {
+    this.isModalOpen = false;
+    this.router.navigate(['/department-detail'], { state: { department } });
+  }
+
+  openDepartmentsByRegionModal(isOpen: boolean, region?: Region) {
+    this.isModalOpen = isOpen;
+
+    if (!isOpen) {
+      this.isModalOpen = false;
+      console.log("Modal closed. isModalOpen:", this.isModalOpen);
+    }
+    if (isOpen && region) this.getDepartmentsByRegion(region.id);
   }
 
 }
