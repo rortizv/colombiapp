@@ -5,26 +5,24 @@ import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonSpinner, LoadingController, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-
-import { City } from '../interfaces/city.interface';
+import { Airport } from '../interfaces/airport.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
 import { ToolsService } from '../services/tools.service';
 
 @Component({
-  selector: 'app-cities',
-  templateUrl: './cities.page.html',
-  styleUrls: ['./cities.page.scss'],
+  selector: 'app-airports',
+  templateUrl: './airports.page.html',
+  styleUrls: ['./airports.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonButtons, IonMenuButton, IonSpinner, IonSearchbar, IonList, IonItem, IonLabel]
 })
-export class CitiesPage implements OnInit, OnDestroy {
+export class AirportsPage implements OnInit, OnDestroy {
 
   public isLoading: boolean = false;
   public searchTerm: string = '';
-  public filteredCities: City[] = [];
-  public searchCityByNameSubscription: Subscription = new Subscription();
-  private searchValue$ = new Subject<string>();
-  private searchSubscription: Subscription | undefined;
+  public airports: Airport[] = [];
+  public filteredAirports: Airport[] = [];
+  public getAirportsSubscription: Subscription = new Subscription();
 
   constructor(private apiColombiaService: ApicolombiaService,
               private toolsService: ToolsService,
@@ -32,38 +30,29 @@ export class CitiesPage implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.searchSubscription = this.searchValue$
-      .pipe(debounceTime(500))
-      .subscribe(searchValue => {
-        this.filterCities(searchValue);
-      });
+    this.getAirports();
   }
 
   ngOnDestroy() {
-    this.searchCityByNameSubscription.unsubscribe();
-    this.searchSubscription?.unsubscribe();
+    this.getAirportsSubscription.unsubscribe();
   }
 
-  async filterCities(searchValue: string) {
-    if (!searchValue || searchValue.length < 4) {
-      this.filteredCities = [];
-      return;
-    }
-
+  async getAirports() {
     this.isLoading = true;
+
     const loading = await this.loadingController.create({
-      message: 'Buscando ciudades...',
+      message: 'Cargando aeropuertos...',
     });
     await loading.present();
 
-    this.searchCityByNameSubscription = this.apiColombiaService.searchCityByName(searchValue)
+    this.getAirportsSubscription = this.apiColombiaService.getAirports()
       .subscribe({
-        next: (data: City[]) => {
-          this.filteredCities = data;
+        next: (data: Airport[]) => {
+          this.filteredAirports = data;
+          this.airports = data;
         },
         error: (error: any) => {
-          this.toolsService.presentToast('No hay ciudades que coincidan con su búsqueda.', 'toast-error');
-          this.filteredCities = [];
+          this.toolsService.presentToast('No se pudieron cargar los aeropuertos.', 'toast-error');
           this.isLoading = false;
           loading.dismiss();
         },
@@ -74,12 +63,21 @@ export class CitiesPage implements OnInit, OnDestroy {
       });
   }
 
-  onSearchInput(event: any) {
-    this.searchValue$.next(event.target.value);
+  async searchAirport(event: any) {
+    const searchTerm = event.target.value.toLowerCase().trim();
+
+    if (!searchTerm) {
+      this.filteredAirports = this.airports;
+      return;
+    }
+
+    this.filteredAirports = this.airports.filter((airport: Airport) => {
+      return airport.name.toLowerCase().includes(searchTerm);
+    });
   }
 
-  openCity(city: City) {
-    this.router.navigate(['/city-detail'], { state: { city } })
+  openAirport(airport: Airport) {
+    console.log('Airport:', airport);
   }
 
 }

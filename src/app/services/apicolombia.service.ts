@@ -9,6 +9,7 @@ import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../in
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
 import { President } from '../interfaces/president.interface';
+import { Airport, AirportsPaged } from '../interfaces/airport.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +63,16 @@ export class ApicolombiaService {
   getPresidents(): Observable<President[]> {
     const url = `${this.apiUrl}/President`;
     return this.http.get<President[]>(url);
+  }
+
+  getAirports(): Observable<Airport[]> {
+    const url = `${this.apiUrl}/Airport`;
+    return this.http.get<Airport[]>(url);
+  }
+
+  getAirportsPaged(page: number, pageSize: number): Observable<AirportsPaged> {
+    const url = `${this.apiUrl}/Airport/pagedList?Page=${page}&PageSize=${pageSize}`;
+    return this.http.get<AirportsPaged>(url);
   }
 
 }

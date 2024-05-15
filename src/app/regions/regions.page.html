@@ -19,9 +19,9 @@
         {{region.description}}
       </ion-card-content>
 
-      <ion-button fill="clear" (click)="openDepartmentsByRegionModal(true, region)">Ver Departamentos</ion-button>
+      <ion-button fill="clear" (click)="openDepartmentsByRegionModal(region)">Ver Departamentos</ion-button>
 
-      <ion-modal [isOpen]="isModalOpen">
+      <ion-modal [isOpen]="isModalOpen" #modal>
         <ng-template>
           <ion-header>
             <ion-toolbar>

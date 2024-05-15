@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, LoadingController, IonSpinner, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { Subscription } from 'rxjs';
+import { Subscription, firstValueFrom } from 'rxjs';
 
 import { ApicolombiaService } from '../services/apicolombia.service';
 
 import { Region } from '../interfaces/region.interface';
-import { Department, DepartmentsByRegionResponse } from '../interfaces/department.interface';
+import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,18 +39,22 @@ import { Router } from '@angular/router';
 })
 export class RegionsPage implements OnInit, OnDestroy {
 
-  regions: Region[] = [];
-  getRegionsSubscription: Subscription = new Subscription();
-  getDepartmentsByRegionSubscription: Subscription = new Subscription();
-  isLoading: boolean = false;
-  isModalOpen: boolean = false;
-  departments: Department[] = [];
+  @ViewChild('modal') modal: ElementRef | any;
+  public isLoading: boolean = false;
+  public isModalOpen: boolean = false;
+  public regions: Region[] = [];
+  public departments: Department[] = [];
+  public department: DepartmentDetail = {} as DepartmentDetail;
+  public getRegionsSubscription: Subscription = new Subscription();
+  public getDepartmentsByRegionSubscription: Subscription = new Subscription();
+  private getDepartmentByIdSubscription: Subscription = new Subscription();
 
   constructor(private apiColombiaService: ApicolombiaService,
-              private loadingController: LoadingController,
-              private router: Router) { }
+    private loadingController: LoadingController,
+    private router: Router) { }
 
   ngOnInit() {
+    console.log("isModalOpen ngoninit", this.isModalOpen);
     this.getRegions();
   }
 
@@ -58,6 +62,11 @@ export class RegionsPage implements OnInit, OnDestroy {
     this.isModalOpen = false;
     this.getRegionsSubscription.unsubscribe();
     this.getDepartmentsByRegionSubscription.unsubscribe();
+    this.getDepartmentByIdSubscription.unsubscribe();
+  }
+
+  ionViewWillLeave() {
+    this.isModalOpen = false;
   }
 
   async getRegions() {
@@ -127,19 +136,29 @@ export class RegionsPage implements OnInit, OnDestroy {
     });
   }
 
-  openDepartment(department: Department) {
+  openDepartmentsByRegionModal(region?: Region) {
+    this.isModalOpen = true;
+
+    if (this.isModalOpen && region) this.getDepartmentsByRegion(region.id);
+  }
+
+  async openDepartment(department: Department) {
     this.isModalOpen = false;
+    await this.getDepartmentById(department.id);
+  }
+
+  navigate(department: DepartmentDetail) {
     this.router.navigate(['/department-detail'], { state: { department } });
   }
 
-  openDepartmentsByRegionModal(isOpen: boolean, region?: Region) {
-    this.isModalOpen = isOpen;
-
-    if (!isOpen) {
-      this.isModalOpen = false;
-      console.log("Modal closed. isModalOpen:", this.isModalOpen);
+  async getDepartmentById(departmentId: number) {
+    try {
+      const response = await firstValueFrom(this.apiColombiaService.getDepartmentById(departmentId));
+      this.department = response;
+      this.navigate(this.department);
+    } catch (error) {
+      console.error('Error getting department by ID:', error);
     }
-    if (isOpen && region) this.getDepartmentsByRegion(region.id);
   }
 
 }

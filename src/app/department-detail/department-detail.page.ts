@@ -18,12 +18,11 @@ import { ApicolombiaService } from '../services/apicolombia.service';
 })
 export class DepartmentDetailPage implements OnInit, OnDestroy {
 
-  public department: DepartmentDetail;
+  public department!: DepartmentDetail;
   private getDepartmentByIdSubscription: Subscription = new Subscription();
 
   constructor(private router: ActivatedRoute,
-              private location: Location,
-              private apiColombiaService: ApicolombiaService) {
+              private location: Location) {
                 this.department = {} as DepartmentDetail;
               }
 
@@ -33,7 +32,7 @@ export class DepartmentDetailPage implements OnInit, OnDestroy {
     );
     department.subscribe(({ department }) => {
       console.log(department);
-      this.getDepartmentById(department.id);
+      this.department = department;
     });
   }
 
@@ -41,13 +40,8 @@ export class DepartmentDetailPage implements OnInit, OnDestroy {
     this.getDepartmentByIdSubscription.unsubscribe();
   }
 
-  async getDepartmentById(departmentId: number) {
-    this.getDepartmentByIdSubscription = await this.apiColombiaService.getDepartmentById(departmentId).subscribe((response) => {
-      this.department = response;
-    });
-  }
-
   goBack() {
+    console.log("Going back", this.location)
     this.location.back();
   }
 

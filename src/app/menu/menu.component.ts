@@ -31,7 +31,8 @@ export class MenuComponent {
     { title: 'Regiones', url: '/regions', icon: 'layers' },
     { title: 'Departamentos', url: '/departments', icon: 'grid' },
     { title: 'Ciudades', url: '/cities', icon: 'business' },
-    { title: 'Presidentes', url: '/presidents', icon: 'man'}
+    { title: 'Presidentes', url: '/presidents', icon: 'man'},
+    { title: 'Aeropuertos', url: '/airports', icon: 'airplane' }
   ];
 
   constructor(private router: Router) {
