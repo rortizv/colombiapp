@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Aeropuertos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <span>
+    <ion-searchbar
+      #searchBar
+      show-clear-button="focus"
+      placeholder="Buscar Aeropuerto..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="searchAirport($event)">
+    </ion-searchbar>
+    <ion-list  *ngIf="!isLoading">
+      <ion-item *ngFor="let airport of filteredAirports" (click)="openAirport(airport)">
+        <ion-label>{{airport.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </span>
+</ion-content>

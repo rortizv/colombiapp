@@ -5,7 +5,7 @@ import { NavParams } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard, IonCardContent, IonItem, IonLabel, IonNote, IonAccordion, IonAccordionGroup, IonList } from '@ionic/angular/standalone';
 import { map } from 'rxjs';
-import { City } from '../interfaces/city.interface';
+import { CityDetail } from '../interfaces/city.interface';
 
 @Component({
   selector: 'app-city-detail',
@@ -17,7 +17,7 @@ import { City } from '../interfaces/city.interface';
 })
 export class CityDetailPage implements OnInit {
 
-  public city!: City;
+  public city!: CityDetail;
 
   constructor(private router: ActivatedRoute,
               private location: Location) { }

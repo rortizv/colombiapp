@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { ColombiaInfo } from '../interfaces/colombia.interface';
-import { Department, DepartmentsByRegionResponse } from '../interfaces/department.interface';
+import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
 import { President } from '../interfaces/president.interface';
+import { Airport, AirportsPaged } from '../interfaces/airport.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,11 @@ export class ApicolombiaService {
     return this.http.get<Department[]>(url);
   }
 
+  getDepartmentById(departmentId: number): Observable<DepartmentDetail> {
+    const url = `${this.apiUrl}/Department/${departmentId}`;
+    return this.http.get<DepartmentDetail>(url);
+  }
+
   getCities(): Observable<City[]> {
     const url = `${this.apiUrl}/City`;
     return this.http.get<City[]>(url);
@@ -57,6 +63,16 @@ export class ApicolombiaService {
   getPresidents(): Observable<President[]> {
     const url = `${this.apiUrl}/President`;
     return this.http.get<President[]>(url);
+  }
+
+  getAirports(): Observable<Airport[]> {
+    const url = `${this.apiUrl}/Airport`;
+    return this.http.get<Airport[]>(url);
+  }
+
+  getAirportsPaged(page: number, pageSize: number): Observable<AirportsPaged> {
+    const url = `${this.apiUrl}/Airport/pagedList?Page=${page}&PageSize=${pageSize}`;
+    return this.http.get<AirportsPaged>(url);
   }
 
 }

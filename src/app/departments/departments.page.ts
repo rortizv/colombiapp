@@ -87,6 +87,7 @@ export class DepartmentsPage implements OnInit, OnDestroy {
         cities.forEach((city: any, index: number) => {
           this.departments[index].capitalCity = city.name;
         });
+        this.filteredDepartments = this.departments;
       },
       error: (error: any) => {
         console.error('Error loading cities:', error);

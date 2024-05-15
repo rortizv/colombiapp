@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{department?.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
+  <ion-list class=" mt-10">
+    <ion-label class="ion-margin-start">Descripción</ion-label>
+    <ion-item>
+      <ion-note slot="start" class="text-justify">{{department?.description}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ciudad capital</ion-label>
+      <ion-note slot="end">{{department?.cityCapital?.name}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Población</ion-label>
+      <ion-note slot="end">{{department?.population | number: '1.0-0'}} habitantes</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Superficie</ion-label>
+      <ion-note slot="end">{{department?.surface | number: '1.0-0'}} km²</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Número de municipios</ion-label>
+      <ion-note slot="end">{{department?.municipalities}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

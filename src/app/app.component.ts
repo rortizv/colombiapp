@@ -50,7 +50,9 @@ import {
   businessOutline,
   businessSharp,
   manOutline,
-  manSharp
+  manSharp,
+  airplaneOutline,
+  airplaneSharp,
 } from 'ionicons/icons';
 import { MenuComponent } from './menu/menu.component';
 
@@ -123,7 +125,9 @@ export class AppComponent {
       businessOutline,
       businessSharp,
       manOutline,
-      manSharp
+      manSharp,
+      airplaneOutline,
+      airplaneSharp
     });
     this.onResize({ target: window });
   }
