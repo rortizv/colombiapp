@@ -11,7 +11,10 @@
   <span *ngIf="!isLoading">
     <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)" class="searchbar"></ion-searchbar>
     <ion-card *ngFor="let president of filteredPresidents" class="card">
-      <img alt="{{ president.fullName }}" [src]="president.image || '../../assets/images/no-image.png'" />
+      <ion-img
+        src="{{president.image || '../../assets/images/no-image.png'}}"
+        alt="{{president.fullName}}">
+      </ion-img>
       <ion-card-header>
         <ion-card-title>{{president.fullName}}</ion-card-title>
         <ion-card-subtitle>Partido político: {{president.politicalParty}}</ion-card-subtitle>
