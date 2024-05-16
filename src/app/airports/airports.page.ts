@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonSpinner, LoadingController, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { Subscription, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { Airport } from '../interfaces/airport.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
 import { ToolsService } from '../services/tools.service';
@@ -77,7 +76,7 @@ export class AirportsPage implements OnInit, OnDestroy {
   }
 
   openAirport(airport: Airport) {
-    console.log('Airport:', airport);
+    this.router.navigate(['/airport-detail'], { state: { airport } })
   }
 
 }
