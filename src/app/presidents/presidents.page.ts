@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar } from '@ionic/angular/standalone';
 import { President } from '../interfaces/president.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './presidents.page.html',
   styleUrls: ['./presidents.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar]
 })
 export class PresidentsPage implements OnInit, OnDestroy {
 
@@ -43,23 +43,24 @@ export class PresidentsPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
-    this.getPresidentsSubscription = this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize).subscribe({
-      next: async ({ data }: any) => {
-        this.presidents = this.presidents.concat(data);
-        this.filteredPresidents = this.filteredPresidents.concat(data);
-        this.setFullName();
-        this.page++;
-        this.isLoading = false;
-        loading.dismiss();
-        setTimeout(() => {
-          this.scrollToLastItem();
-        }, 100); // Adjust timeout as needed
-      },
-      error: (error: any) => {
-        console.error('Error cargando Presidentes:', error);
-        this.isLoading = false;
-        loading.dismiss();
-      }
+    this.getPresidentsSubscription = this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize)
+      .subscribe({
+        next: async ({ data }: any) => {
+          this.presidents = this.presidents.concat(data);
+          this.filteredPresidents = this.filteredPresidents.concat(data);
+          this.setFullName();
+          this.page++;
+          this.isLoading = false;
+          loading.dismiss();
+          setTimeout(() => {
+            this.scrollToLastItem();
+          }, 100);
+        },
+        error: (error: any) => {
+          console.error('Error cargando Presidentes:', error);
+          this.isLoading = false;
+          loading.dismiss();
+        }
     });
   }
 
@@ -97,5 +98,9 @@ export class PresidentsPage implements OnInit, OnDestroy {
       const lastItemOffsetTop = lastItem.scrollTop;
       this.ionContent.scrollToPoint(0, lastItemOffsetTop, 0);
     }
+  }
+
+  setDefaultImage(event: any) {
+    event.target.src = 'assets/images/no-person.png';
   }
 }
