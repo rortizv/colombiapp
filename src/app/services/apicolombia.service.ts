@@ -8,7 +8,7 @@ import { ColombiaInfo } from '../interfaces/colombia.interface';
 import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
-import { President } from '../interfaces/president.interface';
+import { President, PresidentsResp } from '../interfaces/president.interface';
 import { Airport, AirportsPaged } from '../interfaces/airport.interface';
 
 @Injectable({
@@ -65,9 +65,9 @@ export class ApicolombiaService {
     return this.http.get<President[]>(url);
   }
 
-  getPresidentsPaged(page: number, pageSize: number): Observable<President[]> {
+  getPresidentsPaged(page: number, pageSize: number): Observable<PresidentsResp> {
     const url = `${this.apiUrl}/President/pagedList?Page=${page}&PageSize=${pageSize}`;
-    return this.http.get<President[]>(url);
+    return this.http.get<PresidentsResp>(url);
   }
 
   getAirports(): Observable<Airport[]> {

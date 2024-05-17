@@ -3,9 +3,9 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar } from '@ionic/angular/standalone';
-import { President } from '../interfaces/president.interface';
+import { President, PresidentsResp } from '../interfaces/president.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
-import { Subscription } from 'rxjs';
+import { Subscription, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-presidents',
@@ -26,7 +26,7 @@ export class PresidentsPage implements OnInit, OnDestroy {
   @ViewChild(IonContent, { static: false }) ionContent!: IonContent;
 
   constructor(private apiColombiaService: ApicolombiaService,
-              private loadingController: LoadingController) { }
+    private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.getPresidentsPaged();
@@ -43,25 +43,22 @@ export class PresidentsPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
-    this.getPresidentsSubscription = this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize)
-      .subscribe({
-        next: async ({ data }: any) => {
-          this.presidents = this.presidents.concat(data);
-          this.filteredPresidents = this.filteredPresidents.concat(data);
-          this.setFullName();
-          this.page++;
-          this.isLoading = false;
-          loading.dismiss();
-          setTimeout(() => {
-            this.scrollToLastItem();
-          }, 100);
-        },
-        error: (error: any) => {
-          console.error('Error cargando Presidentes:', error);
-          this.isLoading = false;
-          loading.dismiss();
-        }
-    });
+    try {
+      const resp: PresidentsResp = await firstValueFrom(this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize));
+      this.presidents = this.presidents.concat(resp.data);
+      this.filteredPresidents = this.filteredPresidents.concat(resp.data);
+      this.setFullName();
+      this.page++;
+      this.isLoading = false;
+      await loading.dismiss();
+      setTimeout(() => {
+        this.scrollToLastItem();
+      }, 100);
+    } catch (error) {
+      console.error('Error cargando Presidentes:', error);
+      this.isLoading = false;
+      await loading.dismiss();
+    }
   }
 
   setFullName() {
