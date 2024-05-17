@@ -65,6 +65,11 @@ export class ApicolombiaService {
     return this.http.get<President[]>(url);
   }
 
+  getPresidentsPaged(page: number, pageSize: number): Observable<President[]> {
+    const url = `${this.apiUrl}/President/pagedList?Page=${page}&PageSize=${pageSize}`;
+    return this.http.get<President[]>(url);
+  }
+
   getAirports(): Observable<Airport[]> {
     const url = `${this.apiUrl}/Airport`;
     return this.http.get<Airport[]>(url);

@@ -44,5 +44,8 @@
         </ion-card>
       </ion-card-content>
     </ion-card>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </span>
 </ion-content>
