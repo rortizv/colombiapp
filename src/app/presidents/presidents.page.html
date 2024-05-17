@@ -8,16 +8,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
-  <span *ngIf="!isLoading">
-    <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)" class="searchbar"></ion-searchbar>
+  <span>
+    <span class="searchbar-container">
+      <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)" class="searchbar"></ion-searchbar>
+    </span>
     <ion-card *ngFor="let president of filteredPresidents" class="card">
-      <ion-img
-        src="{{president.image || '../../assets/images/no-image.png'}}"
-        alt="{{president.fullName}}">
-      </ion-img>
       <ion-card-header>
-        <ion-card-title>{{president.fullName}}</ion-card-title>
-        <ion-card-subtitle>Partido político: {{president.politicalParty}}</ion-card-subtitle>
+        <ion-item lines="none">
+          <span>
+            <ion-card-title>{{president.fullName}}</ion-card-title>
+            <ion-card-subtitle>Partido político: {{president.politicalParty}}</ion-card-subtitle>
+          </span>
+          <ion-avatar aria-hidden="true" slot="end">
+            <ion-img [src]="president.image || 'assets/images/no-person.png'" (ionError)="setDefaultImage($event)" />
+          </ion-avatar>
+        </ion-item>
       </ion-card-header>
 
       <ion-card-content>

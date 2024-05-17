@@ -4,3 +4,18 @@
     height: 100%;
   }
 }
+
+ion-avatar {
+  --border-radius: 5px;
+}
+
+.searchbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #FFFFFF;
+}
+
+ion-searchbar {
+  width: 100%;
+}
