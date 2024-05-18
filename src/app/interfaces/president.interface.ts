@@ -11,3 +11,11 @@ export interface President {
   cityId:          number;
   city:            string | null;
 }
+
+export interface PresidentsResp {
+  page:         number;
+  pageSize:     number;
+  totalRecords: number;
+  pageCount:    number;
+  data:         President[];
+}

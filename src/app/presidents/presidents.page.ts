@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar } from '@ionic/angular/standalone';
-import { President } from '../interfaces/president.interface';
+import { President, PresidentsResp } from '../interfaces/president.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
-import { Subscription } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-presidents',
@@ -14,9 +14,8 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar]
 })
-export class PresidentsPage implements OnInit, OnDestroy {
+export class PresidentsPage implements OnInit {
 
-  private getPresidentsSubscription: Subscription = new Subscription();
   public presidents: President[] = [];
   public filteredPresidents: President[] = [];
   public isLoading: boolean = false;
@@ -32,10 +31,6 @@ export class PresidentsPage implements OnInit, OnDestroy {
     this.getPresidentsPaged();
   }
 
-  ngOnDestroy() {
-    this.getPresidentsSubscription.unsubscribe();
-  }
-
   async getPresidentsPaged() {
     this.isLoading = true;
     const loading = await this.loadingController.create({
@@ -43,25 +38,22 @@ export class PresidentsPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
-    this.getPresidentsSubscription = this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize)
-      .subscribe({
-        next: async ({ data }: any) => {
-          this.presidents = this.presidents.concat(data);
-          this.filteredPresidents = this.filteredPresidents.concat(data);
-          this.setFullName();
-          this.page++;
-          this.isLoading = false;
-          loading.dismiss();
-          setTimeout(() => {
-            this.scrollToLastItem();
-          }, 100);
-        },
-        error: (error: any) => {
-          console.error('Error cargando Presidentes:', error);
-          this.isLoading = false;
-          loading.dismiss();
-        }
-    });
+    try {
+      const resp: PresidentsResp = await firstValueFrom(this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize));
+      this.presidents = this.presidents.concat(resp.data);
+      this.filteredPresidents = this.filteredPresidents.concat(resp.data);
+      this.setFullName();
+      this.page++;
+      this.isLoading = false;
+      await loading.dismiss();
+      setTimeout(() => {
+        this.scrollToLastItem();
+      }, 100);
+    } catch (error) {
+      console.error('Error cargando Presidentes:', error);
+      this.isLoading = false;
+      await loading.dismiss();
+    }
   }
 
   setFullName() {

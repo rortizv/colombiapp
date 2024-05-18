@@ -32,7 +32,9 @@ export class MenuComponent {
     { title: 'Departamentos', url: '/departments', icon: 'grid' },
     { title: 'Ciudades', url: '/cities', icon: 'business' },
     { title: 'Presidentes', url: '/presidents', icon: 'man'},
-    { title: 'Aeropuertos', url: '/airports', icon: 'airplane' }
+    { title: 'Aeropuertos', url: '/airports', icon: 'airplane' },
+    { title: 'Artículos de la Constitución', url: '/constitution-articles', icon: 'book'},
+    { title: 'Estaciones de radio', url: '/radio-stations', icon: 'radio'}
   ];
 
   constructor(private router: Router) {

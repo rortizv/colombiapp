@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Artículos de la Constitución</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <span class="searchbar-container">
+    <ion-searchbar
+      show-clear-button="focus"
+      placeholder="Buscar por número de Artículo..."
+      [(ngModel)]="searchTerm"
+      (ionInput)="onSearchInput($event)">
+    </ion-searchbar>
+  </span>
+
+  <ion-card *ngIf="article.id !== 0">
+    <ion-card-header>
+      <ion-item lines="none">
+        <span>
+          <ion-card-subtitle class="ion-padding-bottom"><b>Artículo # {{article.articleNumber}}</b></ion-card-subtitle>
+          <ion-card-title class="card-title">{{article.title}}</ion-card-title>
+        </span>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card>
+        <ion-card-content>
+
+          <ion-item>
+            <ion-label>Capítulo #</ion-label>
+            <ion-note slot="end">{{article.chapterNumber}}</ion-note>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-no-margin ion-no-padding">Nombre capítulo</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="gray ion-no-margin ion-no-padding ion-margin-bottom">{{article.chapter}}</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-no-margin ion-no-padding">Contenido</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="gray ion-no-margin ion-no-padding ion-margin-bottom ion-text-justify">{{article.content}}</ion-label>
+          </ion-item>
+
+<!--
+
+          <ion-accordion-group>
+            <ion-accordion value="first">
+              <ion-item slot="header" color="light">
+                <ion-label>Contenido</ion-label>
+              </ion-item>
+              <div class="ion-padding text-justify" slot="content">{{article.content}}</div>
+            </ion-accordion>
+          </ion-accordion-group> -->
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

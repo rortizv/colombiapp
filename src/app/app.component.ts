@@ -53,6 +53,12 @@ import {
   manSharp,
   airplaneOutline,
   airplaneSharp,
+  bookOutline,
+  bookSharp,
+  libraryOutline,
+  librarySharp,
+  radioOutline,
+  radioSharp
 } from 'ionicons/icons';
 import { MenuComponent } from './menu/menu.component';
 
@@ -127,7 +133,13 @@ export class AppComponent {
       manOutline,
       manSharp,
       airplaneOutline,
-      airplaneSharp
+      airplaneSharp,
+      bookOutline,
+      bookSharp,
+      libraryOutline,
+      librarySharp,
+      radioOutline,
+      radioSharp
     });
     this.onResize({ target: window });
   }

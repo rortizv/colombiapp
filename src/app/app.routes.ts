@@ -47,7 +47,15 @@ export const routes: Routes = [
     loadComponent: () => import('./airport-detail/airport-detail.page').then( m => m.AirportDetailPage)
   },
   {
+    path: 'constitution-articles',
+    loadComponent: () => import('./constitution-articles/constitution-articles.page').then( m => m.ConstitutionArticlesPage)
+  },
+  {
+    path: 'radio-stations',
+    loadComponent: () => import('./radio-stations/radio-stations.page').then( m => m.RadioStationsPage)
+  },
+  {
     path: '**',
     redirectTo: 'home',
-  },
+  }
 ];

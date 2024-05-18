@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard, IonCardContent, IonItem, IonLabel, IonNote, IonAccordion, IonAccordionGroup, IonList } from '@ionic/angular/standalone';
 import { map, Subscription } from 'rxjs';
 import { DepartmentDetail } from '../interfaces/department.interface';
-import { ApicolombiaService } from '../services/apicolombia.service';
 
 @Component({
   selector: 'app-department-detail',
