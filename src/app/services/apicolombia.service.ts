@@ -10,6 +10,7 @@ import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
 import { President, PresidentsResp } from '../interfaces/president.interface';
 import { Airport, AirportsPaged } from '../interfaces/airport.interface';
+import { ConstitutionArticle } from '../interfaces/constitution-article.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,11 @@ export class ApicolombiaService {
   getAirportsPaged(page: number, pageSize: number): Observable<AirportsPaged> {
     const url = `${this.apiUrl}/Airport/pagedList?Page=${page}&PageSize=${pageSize}`;
     return this.http.get<AirportsPaged>(url);
+  }
+
+  getArticleById(articleId: number): Observable<ConstitutionArticle> {
+    const url = `${this.apiUrl}/ConstitutionArticle/${articleId}`;
+    return this.http.get<ConstitutionArticle>(url);
   }
 
 }

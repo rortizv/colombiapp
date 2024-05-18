@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar } from '@ionic/angular/standalone';
 import { President, PresidentsResp } from '../interfaces/president.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
-import { Subscription, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-presidents',
@@ -14,9 +14,8 @@ import { Subscription, firstValueFrom } from 'rxjs';
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar]
 })
-export class PresidentsPage implements OnInit, OnDestroy {
+export class PresidentsPage implements OnInit {
 
-  private getPresidentsSubscription: Subscription = new Subscription();
   public presidents: President[] = [];
   public filteredPresidents: President[] = [];
   public isLoading: boolean = false;
@@ -26,14 +25,10 @@ export class PresidentsPage implements OnInit, OnDestroy {
   @ViewChild(IonContent, { static: false }) ionContent!: IonContent;
 
   constructor(private apiColombiaService: ApicolombiaService,
-    private loadingController: LoadingController) { }
+              private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.getPresidentsPaged();
-  }
-
-  ngOnDestroy() {
-    this.getPresidentsSubscription.unsubscribe();
   }
 
   async getPresidentsPaged() {
