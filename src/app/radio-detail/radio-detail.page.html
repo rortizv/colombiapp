@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle de la Estación de Radio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list class=" mt-10">
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-note slot="end">{{radioStation.name}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Frecuencia/Banda</ion-label>
+      <ion-note slot="end">{{radioStation.frequency}} {{radioStation.band}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ciudad</ion-label>
+      <ion-note slot="end">{{radioStation.city.name}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>URL</ion-label>
+      <ion-note slot="end">
+        <a target="_blank" [href]="radioStation.url">{{radioStation.url}}</a>
+      </ion-note>
+    </ion-item>
+    <div class="flexColumn">
+      <ion-label class="streamerLabel">Streamers</ion-label>
+      <ion-note slot="end" *ngFor="let streamer of radioStation.streamers" class="streamersLinks">
+        <ul>
+          <li><a target="_blank" [href]="streamer">{{streamer}}</a></li>
+        </ul>
+      </ion-note>
+    </div>
+  </ion-list>
+</ion-content>

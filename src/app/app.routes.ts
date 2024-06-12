@@ -55,6 +55,10 @@ export const routes: Routes = [
     loadComponent: () => import('./radio-stations/radio-stations.page').then( m => m.RadioStationsPage)
   },
   {
+    path: 'radio-detail',
+    loadComponent: () => import('./radio-detail/radio-detail.page').then( m => m.RadioDetailPage)
+  },
+  {
     path: '**',
     redirectTo: 'home',
   }
