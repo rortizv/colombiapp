@@ -8,6 +8,7 @@ import { ColombiaInfo } from '../interfaces/colombia.interface';
 import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Region } from '../interfaces/region.interface';
 import { City } from '../interfaces/city.interface';
+import { Radio } from '../interfaces/radio.interface';
 import { President, PresidentsResp } from '../interfaces/president.interface';
 import { Airport, AirportsPaged } from '../interfaces/airport.interface';
 import { ConstitutionArticle } from '../interfaces/constitution-article.interface';
@@ -84,6 +85,11 @@ export class ApicolombiaService {
   getArticleById(articleId: number): Observable<ConstitutionArticle> {
     const url = `${this.apiUrl}/ConstitutionArticle/${articleId}`;
     return this.http.get<ConstitutionArticle>(url);
+  }
+
+  getRadioStations(): Observable<Radio[]> {
+    const url = `${this.apiUrl}/Radio`;
+    return this.http.get<Radio[]>(url);
   }
 
 }

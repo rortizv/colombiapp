@@ -15,15 +15,15 @@
     </ion-item>
     <ion-item>
       <ion-label>Población</ion-label>
-      <ion-note slot="end">{{city.population | number: '1.0-0'}} habitantes</ion-note>
+      <ion-note slot="end">{{city.population ? (city.population | number: '1.0-0') + ' habitantes' : 'No hay información'}}</ion-note>
     </ion-item>
     <ion-item>
       <ion-label>Código postal</ion-label>
-      <ion-note slot="end">{{city.postalCode}}</ion-note>
+      <ion-note slot="end">{{city.postalCode ? city.postalCode : 'No hay información'}}</ion-note>
     </ion-item>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label>Superficie</ion-label>
-      <ion-note slot="end">{{city.surface | number: '1.0-0'}} km²</ion-note>
+      <ion-note slot="end">{{city.surface ? (city.population | number: '1.0-0') + ' km²' : 'No hay información'}} </ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
