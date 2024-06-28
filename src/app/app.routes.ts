@@ -61,5 +61,13 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'home',
+  },
+  {
+    path: 'maps',
+    loadComponent: () => import('./maps/maps.page').then( m => m.MapsPage)
+  },
+  {
+    path: 'map-detail',
+    loadComponent: () => import('./map-detail/map-detail.page').then( m => m.MapDetailPage)
   }
 ];

@@ -76,7 +76,6 @@ export class RadioStationsPage implements OnInit, OnDestroy {
   }
 
   openRadioStation(radioStation: Radio) {
-    console.log(radioStation);
     this.router.navigate(['/radio-detail'], { state: { radioStation } })
   }
 
