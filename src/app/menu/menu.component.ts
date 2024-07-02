@@ -31,10 +31,11 @@ export class MenuComponent {
     { title: 'Regiones', url: '/regions', icon: 'layers' },
     { title: 'Departamentos', url: '/departments', icon: 'grid' },
     { title: 'Ciudades', url: '/cities', icon: 'business' },
-    { title: 'Presidentes', url: '/presidents', icon: 'man'},
+    { title: 'Presidentes', url: '/presidents', icon: 'man' },
     { title: 'Aeropuertos', url: '/airports', icon: 'airplane' },
-    { title: 'Artículos de la Constitución', url: '/constitution-articles', icon: 'book'},
-    { title: 'Estaciones de radio', url: '/radio-stations', icon: 'radio'}
+    { title: 'Artículos de la Constitución', url: '/constitution-articles', icon: 'book' },
+    { title: 'Estaciones de radio', url: '/radio-stations', icon: 'radio' },
+    { title: 'Ciudades cerca', url: '/nearby-cities', icon: 'sparkles' },
   ];
 
   constructor(private router: Router) {

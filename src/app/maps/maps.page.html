@@ -15,7 +15,7 @@
   </ion-list> -->
 
 
-  <ion-card *ngFor="let map of maps" class="card" *ngIf="!isLoading">
+  <ion-card *ngFor="let map of maps" class="card">
     <ion-card-header>
       <ion-item lines="none">
         <span>
@@ -41,7 +41,7 @@
         </ion-accordion>
       </ion-accordion-group>
 
-      <ion-card>
+      <!-- <ion-card>
         <ion-card-content>
           <ion-item>
             <ion-label>Inicio periodo</ion-label>
@@ -52,7 +52,7 @@
             <ion-note slot="end">{{president.endPeriodDate}}</ion-note>
           </ion-item>
         </ion-card-content>
-      </ion-card>
+      </ion-card> -->
     </ion-card-content>
   </ion-card>
 </ion-content>
