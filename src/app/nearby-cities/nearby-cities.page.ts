@@ -15,11 +15,14 @@ export class NearbyCitiesPage implements OnInit {
   nearbyCities: any;
   userLocation: any;
 
+  latitude: number = 0;
+  longitude: number = 0;
+
   constructor() { }
 
   ngOnInit() {
     console.log('NearbyCitiesPage.ngOnInit');
-    this.getUserLocation();
+    this.getNearbyCities();
   }
 
   async getNearbyCities() {
@@ -29,17 +32,10 @@ export class NearbyCitiesPage implements OnInit {
       const longitude = position.coords.longitude;
       // Use latitude and longitude to get nearby cities
       // ...
+
     }, (error) => {
       console.log('Error getting user location:', error);
     });
   }
 
-  getUserLocation() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log('User location:', position.coords);
-      this.userLocation = position.coords;
-    }, (error) => {
-      console.log('Error getting user location:', error);
-    });
-  }
 }
