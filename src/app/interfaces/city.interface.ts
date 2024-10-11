@@ -1,17 +1,17 @@
 export interface City {
-  airports: any;
-  department: string;
+  airports: string | null;
+  department: string | null;
   departmentId: number;
   description: string;
   id: number;
-  indigenousReservations: any;
+  indigenousReservations: string | null;
   name: string;
-  population: number | any;
-  postalCode: string | any;
-  presidents: any;
-  radios: any;
-  surface: number | any;
-  touristAttractions: any;
+  population: number;
+  postalCode: string;
+  presidents: string | null;
+  radios: string | null;
+  surface: number;
+  touristAttractions: string | null;
 }
 
 export interface CityDetail {
