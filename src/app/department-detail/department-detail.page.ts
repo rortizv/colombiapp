@@ -30,7 +30,6 @@ export class DepartmentDetailPage implements OnInit, OnDestroy {
       map(() => window.history.state)
     );
     department.subscribe(({ department }) => {
-      console.log(department);
       this.department = department;
     });
   }
@@ -40,7 +39,6 @@ export class DepartmentDetailPage implements OnInit, OnDestroy {
   }
 
   goBack() {
-    console.log("Going back", this.location)
     this.location.back();
   }
 
