@@ -18,10 +18,7 @@ import { City } from '../interfaces/city.interface';
 })
 export class DepartmentsPage implements OnInit, OnDestroy {
 
-  private getCitiesSubscription:              Subscription = new Subscription();
-  private getCityByIdSubscription:            Subscription = new Subscription();
   private getDepartmentsSubscription:         Subscription = new Subscription();
-  private getDepartmentsByRegionSubscription: Subscription = new Subscription();
 
   public departments: Department[] = [];
   public filteredDepartments: Department[] = [];
@@ -36,9 +33,6 @@ export class DepartmentsPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getCitiesSubscription.unsubscribe();
-    this.getCityByIdSubscription.unsubscribe();
-    this.getDepartmentsByRegionSubscription.unsubscribe();
     this.getDepartmentsSubscription.unsubscribe();
   }
 
@@ -53,7 +47,6 @@ export class DepartmentsPage implements OnInit, OnDestroy {
       next: (data: any) => {
         this.departments = data;
         this.filteredDepartments = data;
-        this.setCities();
         this.setImages();
         this.isLoading = false;
         loading.dismiss();
@@ -62,40 +55,6 @@ export class DepartmentsPage implements OnInit, OnDestroy {
         console.error('Error cargando Departamentos:', error);
         this.isLoading = false;
         loading.dismiss();
-      }
-    });
-  }
-
-  async setCities() {
-    const observables: Observable<any>[] = [];
-
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: 'Cargando Ciudades capitales...',
-    });
-    await loading.present();
-
-    this.departments.forEach((department: Department) => {
-      const observable = this.apiColombiaService.getCityById(department.cityCapitalId);
-      observables.push(observable);
-    });
-
-    const combinedObservable = forkJoin(observables);
-
-    this.getCityByIdSubscription = combinedObservable.subscribe({
-      next: (cities: any[]) => {
-        cities.forEach((city: any, index: number) => {
-          this.departments[index].capitalCity = city.name;
-        });
-        this.filteredDepartments = this.departments;
-      },
-      error: (error: any) => {
-        console.error('Error loading cities:', error);
-      },
-      complete: () => {
-        loading.dismiss();
-        this.getCityByIdSubscription.unsubscribe();
-        this.isLoading = false;
       }
     });
   }

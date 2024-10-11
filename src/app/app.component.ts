@@ -58,7 +58,9 @@ import {
   libraryOutline,
   librarySharp,
   radioOutline,
-  radioSharp
+  radioSharp,
+  sparklesOutline,
+  sparklesSharp
 } from 'ionicons/icons';
 import { MenuComponent } from './menu/menu.component';
 
@@ -139,7 +141,9 @@ export class AppComponent {
       libraryOutline,
       librarySharp,
       radioOutline,
-      radioSharp
+      radioSharp,
+      sparklesOutline,
+      sparklesSharp
     });
     this.onResize({ target: window });
   }

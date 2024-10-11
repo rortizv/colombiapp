@@ -12,6 +12,7 @@ import { Radio } from '../interfaces/radio.interface';
 import { President, PresidentsResp } from '../interfaces/president.interface';
 import { Airport, AirportsPaged } from '../interfaces/airport.interface';
 import { ConstitutionArticle } from '../interfaces/constitution-article.interface';
+import { Map } from '../interfaces/map.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -90,6 +91,11 @@ export class ApicolombiaService {
   getRadioStations(): Observable<Radio[]> {
     const url = `${this.apiUrl}/Radio`;
     return this.http.get<Radio[]>(url);
+  }
+
+  getMaps(): Observable<Map[]> {
+    const url = `${this.apiUrl}/Map`;
+    return this.http.get<Map[]>(url);
   }
 
 }

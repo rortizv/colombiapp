@@ -24,9 +24,9 @@ export class RadioStationsPage implements OnInit, OnDestroy {
   public getRadioStationsSubscription: Subscription = new Subscription();
 
   constructor(private apiColombiaService: ApicolombiaService,
-              private toolsService: ToolsService,
-              private loadingController: LoadingController,
-              private router: Router) { }
+    private toolsService: ToolsService,
+    private loadingController: LoadingController,
+    private router: Router) { }
 
   ngOnInit() {
     this.getRadioStations();
@@ -40,7 +40,7 @@ export class RadioStationsPage implements OnInit, OnDestroy {
     this.isLoading = true;
 
     const loading = await this.loadingController.create({
-      message: 'Cargando aeropuertos...',
+      message: 'Cargando estaciones de radio...',
     });
     await loading.present();
 
@@ -76,7 +76,6 @@ export class RadioStationsPage implements OnInit, OnDestroy {
   }
 
   openRadioStation(radioStation: Radio) {
-    console.log(radioStation);
     this.router.navigate(['/radio-detail'], { state: { radioStation } })
   }
 
