@@ -59,14 +59,6 @@ export const routes: Routes = [
     loadComponent: () => import('./radio-detail/radio-detail.page').then(m => m.RadioDetailPage)
   },
   {
-    path: 'maps',
-    loadComponent: () => import('./maps/maps.page').then(m => m.MapsPage)
-  },
-  {
-    path: 'map-detail',
-    loadComponent: () => import('./map-detail/map-detail.page').then(m => m.MapDetailPage)
-  },
-  {
     path: 'nearby-cities',
     loadComponent: () => import('./nearby-cities/nearby-cities.page').then(m => m.NearbyCitiesPage)
   },
