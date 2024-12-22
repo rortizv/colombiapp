@@ -3,7 +3,7 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavParams } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard, IonCardContent, IonItem, IonLabel, IonNote, IonAccordion, IonAccordionGroup, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonLabel, IonNote, IonList } from '@ionic/angular/standalone';
 import { map } from 'rxjs';
 import { CityDetail } from '../interfaces/city.interface';
 
@@ -12,7 +12,7 @@ import { CityDetail } from '../interfaces/city.interface';
   templateUrl: './city-detail.page.html',
   styleUrls: ['./city-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonBackButton, IonCard, IonCardContent, IonItem, IonList, IonLabel, IonNote, IonAccordion, IonAccordionGroup],
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonBackButton, IonItem, IonList, IonLabel, IonNote],
   providers: [NavParams]
 })
 export class CityDetailPage implements OnInit {
@@ -20,7 +20,7 @@ export class CityDetailPage implements OnInit {
   public city!: CityDetail;
 
   constructor(private router: ActivatedRoute,
-              private location: Location) { }
+    private location: Location) { }
 
   ngOnInit() {
     let city = this.router.paramMap.pipe(
