@@ -8,26 +8,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list class=" mt-10">
-    <ion-item>
-      <ion-label>Nombre</ion-label>
-      <ion-note slot="end">{{airport.name}}</ion-note>
-    </ion-item>
-    <ion-item>
-      <ion-label>Tipo de aeropuerto</ion-label>
-      <ion-note slot="end">{{airport.type}}</ion-note>
-    </ion-item>
-    <ion-item>
-      <ion-label>Ubicado en</ion-label>
-      <ion-note slot="end">{{airport.department.name}}</ion-note>
-    </ion-item>
-    <ion-item>
-      <ion-label>Código IATA</ion-label>
-      <ion-note slot="end">{{airport.iataCode}}</ion-note>
-    </ion-item>
-    <ion-item>
-      <ion-label>Código OACI</ion-label>
-      <ion-note slot="end">{{airport.oaciCode}}</ion-note>
-    </ion-item>
-  </ion-list>
+  <ng-container *ngIf="airport$ | async as airport">
+    <ion-list class="mt-10">
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-note slot="end">{{ airport.name }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo de aeropuerto</ion-label>
+        <ion-note slot="end">{{ airport.type }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ubicado en</ion-label>
+        <ion-note slot="end">{{ airport.department.name }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Código IATA</ion-label>
+        <ion-note slot="end">{{ airport.iataCode }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Código OACI</ion-label>
+        <ion-note slot="end">{{ airport.oaciCode }}</ion-note>
+      </ion-item>
+    </ion-list>
+  </ng-container>
 </ion-content>

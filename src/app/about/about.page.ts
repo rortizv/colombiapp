@@ -76,18 +76,21 @@ export class AboutPage implements OnInit, OnDestroy {
   }
 
   getColombiaInfo() {
-    this.getColombiaInfoSubscription = this.apiColombiaService.getColombiaInfo().subscribe({
-      next: (data: ColombiaInfo) => {
-        this.colombiaInfo = data;
-      },
-      error: (error: any) => {
-        console.error('Error fetching Colombia info:', error);
-      }
-    });
+    this.getColombiaInfoSubscription = this.apiColombiaService.getColombiaInfo()
+      .subscribe({
+        next: (data: ColombiaInfo) => {
+          this.colombiaInfo = data;
+        },
+        error: (error: any) => {
+          console.error('Error fetching Colombia info:', error);
+        }
+      });
   }
 
   ngOnDestroy() {
-    this.getColombiaInfoSubscription.unsubscribe();
+    if (this.getColombiaInfoSubscription) {
+      this.getColombiaInfoSubscription.unsubscribe();
+    }
   }
 
 }

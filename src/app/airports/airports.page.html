@@ -8,18 +8,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <span class="searchbar-container">
-    <ion-searchbar
-      show-clear-button="focus"
-      placeholder="Buscar Aeropuerto..."
-      [(ngModel)]="searchTerm"
+  <div class="searchbar-container">
+    <ion-searchbar show-clear-button="focus" placeholder="Buscar Aeropuerto..." [(ngModel)]="searchTerm"
       (ionInput)="searchAirport($event)">
     </ion-searchbar>
-  </span>
+  </div>
 
-  <ion-list *ngIf="!isLoading">
+  <ion-list *ngIf="!isLoading; else loadingTemplate">
     <ion-item *ngFor="let airport of filteredAirports" (click)="openAirport(airport)">
-      <ion-label>{{airport.name}}</ion-label>
+      <ion-label>{{ airport.name }}</ion-label>
     </ion-item>
   </ion-list>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <ion-spinner></ion-spinner>
+      <p>Cargando aeropuertos...</p>
+    </div>
+  </ng-template>
 </ion-content>
