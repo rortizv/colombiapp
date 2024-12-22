@@ -1,14 +1,16 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, LoadingController, IonSpinner, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { Subscription, firstValueFrom } from 'rxjs';
+import { IonContent, IonButton, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonCard, IonCardHeader, IonCardContent, IonCardTitle, LoadingController, IonModal, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
+import { Subject, firstValueFrom } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { ApicolombiaService } from '../services/apicolombia.service';
 
 import { Region } from '../interfaces/region.interface';
 import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
 import { Router } from '@angular/router';
+import { ToolsService } from '../services/tools.service';
 
 @Component({
   selector: 'app-regions',
@@ -28,41 +30,45 @@ import { Router } from '@angular/router';
     IonCardHeader,
     IonCardContent,
     IonCardTitle,
-    IonCardSubtitle,
-    IonSpinner,
     IonButton,
     IonModal,
     IonList,
     IonItem,
-    IonLabel
-  ]
+    IonLabel,
+  ],
 })
 export class RegionsPage implements OnInit, OnDestroy {
-
   @ViewChild('modal') modal: ElementRef | any;
   public isLoading: boolean = false;
   public isModalOpen: boolean = false;
   public regions: Region[] = [];
   public departments: Department[] = [];
   public department: DepartmentDetail = {} as DepartmentDetail;
-  public getRegionsSubscription: Subscription = new Subscription();
-  public getDepartmentsByRegionSubscription: Subscription = new Subscription();
-  private getDepartmentByIdSubscription: Subscription = new Subscription();
+  private ngUnsubscribe = new Subject<void>();
 
-  constructor(private apiColombiaService: ApicolombiaService,
+  private static IMAGE_URLS: Record<number, string> = {
+    1: 'assets/images/region-caribe.png',
+    2: 'assets/images/region-pacifico.png',
+    3: 'assets/images/region-orinoquia.png',
+    4: 'assets/images/region-amazonia.png',
+    5: 'assets/images/region-andina.png',
+    6: 'assets/images/region-insular.png',
+  };
+
+  constructor(
+    private apiColombiaService: ApicolombiaService,
     private loadingController: LoadingController,
-    private router: Router) { }
+    private toolsService: ToolsService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
-    console.log("isModalOpen ngoninit", this.isModalOpen);
     this.getRegions();
   }
 
   ngOnDestroy() {
-    this.isModalOpen = false;
-    this.getRegionsSubscription.unsubscribe();
-    this.getDepartmentsByRegionSubscription.unsubscribe();
-    this.getDepartmentByIdSubscription.unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   ionViewWillLeave() {
@@ -70,69 +76,23 @@ export class RegionsPage implements OnInit, OnDestroy {
   }
 
   async getRegions() {
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: 'Cargando Regiones...',
-    });
-    await loading.present();
-
-    this.getRegionsSubscription = this.apiColombiaService.getRegions().subscribe({
-      next: (data: Region[]) => {
-        this.regions = data;
-        this.setImages();
-        this.isLoading = false;
-        loading.dismiss();
-      },
-      error: (error: any) => {
-        console.error('Error cargando info de Regiones', error);
-        this.isLoading = false;
-        loading.dismiss();
-      }
-    });
+    await this.presentLoading('Cargando Regiones...');
+    this.apiColombiaService
+      .getRegions()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data: Region[]) => {
+          this.regions = data;
+          this.setImages();
+        },
+        error: (error: any) => this.toolsService.handleError('Error cargando info de Regiones', error),
+        complete: () => this.toolsService.dismissLoading(),
+      });
   }
 
   setImages() {
     this.regions.forEach((region: Region) => {
-      switch (region.id) {
-        case 1:
-          region.imageUrl = 'assets/images/region-caribe.png';
-          break;
-        case 2:
-          region.imageUrl = 'assets/images/region-pacifico.png';
-          break;
-        case 3:
-          region.imageUrl = 'assets/images/region-orinoquia.png';
-          break;
-        case 4:
-          region.imageUrl = 'assets/images/region-amazonia.png';
-          break;
-        case 5:
-          region.imageUrl = 'assets/images/region-andina.png';
-          break;
-        case 6:
-          region.imageUrl = 'assets/images/region-insular.png';
-      }
-    });
-  }
-
-  async getDepartmentsByRegion(regionId: number) {
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: 'Cargando Departamentos...',
-    });
-    await loading.present();
-
-    this.getDepartmentsByRegionSubscription = this.apiColombiaService.getDepartmentsByRegion(regionId).subscribe({
-      next: (data: DepartmentsByRegionResponse) => {
-        this.departments = data.departments;
-        this.isLoading = false;
-        loading.dismiss();
-      },
-      error: (error: any) => {
-        console.error('Error cargando info de Departamentos', error);
-        this.isLoading = false;
-        loading.dismiss();
-      }
+      region.imageUrl = RegionsPage.IMAGE_URLS[region.id] || 'assets/images/default-region.png';
     });
   }
 
@@ -142,8 +102,29 @@ export class RegionsPage implements OnInit, OnDestroy {
     if (this.isModalOpen && region) this.getDepartmentsByRegion(region.id);
   }
 
+  async getDepartmentsByRegion(regionId: number) {
+    await this.presentLoading('Cargando Departamentos...');
+    this.apiColombiaService
+      .getDepartmentsByRegion(regionId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (data: DepartmentsByRegionResponse) => {
+          this.departments = data.departments;
+        },
+        error: (error: any) => this.toolsService.handleError('Error cargando info de Departamentos', error),
+        complete: () => this.toolsService.dismissLoading(),
+      });
+  }
+
+  toggleModal(state: boolean, region?: Region) {
+    this.isModalOpen = state;
+    if (state && region) {
+      this.getDepartmentsByRegion(region.id);
+    }
+  }
+
   async openDepartment(department: Department) {
-    this.isModalOpen = false;
+    this.toggleModal(false);
     await this.getDepartmentById(department.id);
   }
 
@@ -157,8 +138,13 @@ export class RegionsPage implements OnInit, OnDestroy {
       this.department = response;
       this.navigate(this.department);
     } catch (error) {
-      console.error('Error getting department by ID:', error);
+      this.toolsService.handleError('Error obteniendo departamento por ID', error);
     }
+  }
+
+  private async presentLoading(message: string) {
+    const loading = await this.loadingController.create({ message });
+    await loading.present();
   }
 
 }

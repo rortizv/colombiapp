@@ -86,7 +86,7 @@ export class ApicolombiaService {
   }
 
   getPresidents(): Observable<President[]> {
-    const url = `${this.apiUrl}/President`;
+    const url = `${this.apiUrl}/President?sortBy=name&sortDirection=asc`;
     return this.http.get<President[]>(url).pipe(
       catchError(this.toolsService.handleError<President[]>('getPresidents', []))
     );

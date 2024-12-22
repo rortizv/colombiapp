@@ -2,8 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar } from '@ionic/angular/standalone';
-import { President, PresidentsResp } from '../interfaces/president.interface';
+import {
+  IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
+  LoadingController, IonSearchbar, IonCard, IonCardContent, IonCardHeader,
+  IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem,
+  IonLabel, IonNote, IonImg, IonAvatar
+} from '@ionic/angular/standalone';
+import { President } from '../interfaces/president.interface';
 import { ApicolombiaService } from '../services/apicolombia.service';
 import { firstValueFrom } from 'rxjs';
 
@@ -12,26 +17,34 @@ import { firstValueFrom } from 'rxjs';
   templateUrl: './presidents.page.html',
   styleUrls: ['./presidents.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel, IonNote, IonImg, IonInfiniteScroll, IonInfiniteScrollContent, IonAvatar]
+  imports: [
+    IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
+    IonButtons, IonMenuButton, IonSearchbar, IonCard, IonCardContent, IonCardHeader,
+    IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem,
+    IonLabel, IonNote, IonImg, IonAvatar
+  ]
 })
 export class PresidentsPage implements OnInit {
 
   public presidents: President[] = [];
   public filteredPresidents: President[] = [];
-  public isLoading: boolean = false;
-  public page: number = 1;
-  public pageSize: number = 5;
+  public isLoading = false;
 
   @ViewChild(IonContent, { static: false }) ionContent!: IonContent;
 
-  constructor(private apiColombiaService: ApicolombiaService,
-              private loadingController: LoadingController) { }
+  constructor(
+    private apiColombiaService: ApicolombiaService,
+    private loadingController: LoadingController
+  ) { }
 
   ngOnInit() {
-    this.getPresidentsPaged();
+    this.loadPresidents();
   }
 
-  async getPresidentsPaged() {
+  // Load presidents data with pagination
+  async loadPresidents() {
+    if (this.isLoading) return;
+
     this.isLoading = true;
     const loading = await this.loadingController.create({
       message: 'Cargando Presidentes...',
@@ -39,60 +52,49 @@ export class PresidentsPage implements OnInit {
     await loading.present();
 
     try {
-      const resp: PresidentsResp = await firstValueFrom(this.apiColombiaService.getPresidentsPaged(this.page, this.pageSize));
-      this.presidents = this.presidents.concat(resp.data);
-      this.filteredPresidents = this.filteredPresidents.concat(resp.data);
-      this.setFullName();
-      this.page++;
-      this.isLoading = false;
-      await loading.dismiss();
-      setTimeout(() => {
-        this.scrollToLastItem();
-      }, 100);
+      // Fetch all presidents
+      const allPresidents: President[] = await firstValueFrom(this.apiColombiaService.getPresidents());
+
+      // Update the list of presidents and filteredPresidents
+      this.presidents = allPresidents;
+      this.filteredPresidents = allPresidents;
+
+      // Prepare display data
+      this.updateFullNames();
     } catch (error) {
-      console.error('Error cargando Presidentes:', error);
+      console.error('Error al cargar Presidentes:', error);
+    } finally {
       this.isLoading = false;
       await loading.dismiss();
     }
   }
 
-  setFullName() {
-    this.presidents.forEach((president: President) => {
-      president.fullName = `${president.name} ${president.lastName}`;
-    });
-    this.filteredPresidents = this.presidents;
-  }
-
-  async searchPresident(event: any) {
-    const searchTerm = event.target.value.toLowerCase().trim();
-
-    if (!searchTerm) {
-      this.filteredPresidents = this.presidents;
-      return;
-    }
-
-    this.filteredPresidents = this.presidents.filter((president: President) => {
-      return president.fullName.toLowerCase().includes(searchTerm);
+  // Set the full name for presidents
+  updateFullNames() {
+    this.presidents.forEach((president) => {
+      president.fullName = `${president.name} ${president.lastName}`.trim();
     });
   }
 
-  async onIonInfinite(event: any) {
-    this.getPresidentsPaged();
-    setTimeout(() => {
-      (event as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
+  // Search presidents by name or last name
+  searchPresident(event: any) {
+    const searchTerm = event.target.value?.toLowerCase().trim() || '';
+    this.filteredPresidents = searchTerm
+      ? this.presidents.filter((president) =>
+        president.fullName.toLowerCase().includes(searchTerm)
+      )
+      : [...this.presidents];
   }
 
-  async scrollToLastItem() {
-    const scrollElement = await this.ionContent.getScrollElement();
-    const lastItem = scrollElement.querySelector('ion-card:last-child');
-    if (lastItem) {
-      const lastItemOffsetTop = lastItem.scrollTop;
-      this.ionContent.scrollToPoint(0, lastItemOffsetTop, 0);
-    }
+  // Handle infinite scroll event
+  async onIonInfinite(event: InfiniteScrollCustomEvent) {
+    await this.loadPresidents();
+    event.target.complete();
   }
 
-  setDefaultImage(event: any) {
-    event.target.src = 'assets/images/no-person.png';
+  // Fallback to default image
+  setDefaultImage(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/images/no-person.png';
   }
 }

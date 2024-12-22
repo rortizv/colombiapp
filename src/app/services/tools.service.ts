@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular/standalone';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,10 @@ import { Observable, of } from 'rxjs';
 })
 export class ToolsService {
 
-  constructor(private toastController: ToastController) { }
+  constructor(
+    private toastController: ToastController,
+    private loadingController: LoadingController,
+    private alertController: AlertController) { }
 
   async presentToast(message: string = '', cssClass: string = '') {
     try {
@@ -29,6 +33,21 @@ export class ToolsService {
       console.error(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
+  }
+
+  public async handleErrorToast(message: string, error: any) {
+    console.error(message, error);
+    await this.dismissLoading();
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  public async dismissLoading() {
+    await this.loadingController.dismiss();
   }
 
 }

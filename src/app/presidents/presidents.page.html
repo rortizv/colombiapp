@@ -10,7 +10,8 @@
 <ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig">
   <span>
     <span class="searchbar-container">
-      <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)" class="searchbar"></ion-searchbar>
+      <ion-searchbar show-clear-button="focus" placeholder="Buscar Presidente..." (ionInput)="searchPresident($event)"
+        class="searchbar"></ion-searchbar>
     </span>
     <ion-card *ngFor="let president of filteredPresidents" class="card">
       <ion-card-header>
@@ -49,8 +50,5 @@
         </ion-card>
       </ion-card-content>
     </ion-card>
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
   </span>
 </ion-content>

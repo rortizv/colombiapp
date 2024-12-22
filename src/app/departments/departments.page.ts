@@ -23,7 +23,7 @@ export class DepartmentsPage implements OnInit, OnDestroy {
 
   constructor(
     private apiColombiaService: ApicolombiaService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
   ) { }
 
   ngOnInit() {

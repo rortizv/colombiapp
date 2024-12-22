@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonMenu, IonIcon, IonMenuToggle, IonLabel, IonItem, IonNote, IonListHeader, IonContent, IonList } from '@ionic/angular/standalone';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { IonMenu, IonIcon, IonMenuToggle, IonLabel, IonItem, IonListHeader, IonContent, IonList } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 import { NgFor } from '@angular/common';
 
 @Component({
@@ -14,12 +14,9 @@ import { NgFor } from '@angular/common';
     IonLabel,
     IonIcon,
     IonItem,
-    IonNote,
     IonListHeader,
     IonContent,
     IonList,
-    RouterLink,
-    RouterLinkActive,
     NgFor
   ]
 })
@@ -35,7 +32,6 @@ export class MenuComponent {
     { title: 'Aeropuertos', url: '/airports', icon: 'airplane' },
     { title: 'Artículos de la Constitución', url: '/constitution-articles', icon: 'book' },
     { title: 'Estaciones de radio', url: '/radio-stations', icon: 'radio' },
-    { title: 'Ciudades cerca', url: '/nearby-cities', icon: 'sparkles' },
   ];
 
   constructor(private router: Router) {
