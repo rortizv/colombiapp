@@ -6,9 +6,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { City } from '../interfaces/city.interface';
-import { ApicolombiaService } from '../services/apicolombia.service';
-import { ToolsService } from '../services/tools.service';
+import { City } from '../../core/interfaces/city.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
+import { ToolsService } from '../../core/services/tools.service';
 
 @Component({
   selector: 'app-cities',

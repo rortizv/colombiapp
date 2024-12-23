@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonList, IonLabel, IonNote } from '@ionic/angular/standalone';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Airport } from '../interfaces/airport.interface';
+import { Airport } from '../../core/interfaces/airport.interface';
 
 @Component({
   selector: 'app-airport-detail',

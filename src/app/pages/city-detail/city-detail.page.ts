@@ -5,31 +5,29 @@ import { NavParams } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonItem, IonLabel, IonNote, IonList } from '@ionic/angular/standalone';
 import { map } from 'rxjs';
-import { Radio } from '../interfaces/radio.interface';
+import { CityDetail } from '../../core/interfaces/city.interface';
 
 @Component({
-  selector: 'app-radio-detail',
-  templateUrl: './radio-detail.page.html',
-  styleUrls: ['./radio-detail.page.scss'],
+  selector: 'app-city-detail',
+  templateUrl: './city-detail.page.html',
+  styleUrls: ['./city-detail.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonBackButton, IonItem, IonList, IonLabel, IonNote],
   providers: [NavParams]
 })
-export class RadioDetailPage implements OnInit {
+export class CityDetailPage implements OnInit {
 
-  public radioStation!: Radio;
+  public city!: CityDetail;
 
-  constructor(
-    private router: ActivatedRoute,
-    private location: Location,
-  ) { }
+  constructor(private router: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
-    let radioStation = this.router.paramMap.pipe(
+    let city = this.router.paramMap.pipe(
       map(() => window.history.state)
     );
-    radioStation.subscribe(({ radioStation }) => {
-      this.radioStation = radioStation;
+    city.subscribe(({ city }) => {
+      this.city = city;
     });
   }
 

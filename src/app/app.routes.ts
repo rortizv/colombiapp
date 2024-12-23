@@ -12,51 +12,51 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    loadComponent: () => import('./about/about.page').then(m => m.AboutPage)
+    loadComponent: () => import('./pages/about/about.page').then(m => m.AboutPage)
   },
   {
     path: 'regions',
-    loadComponent: () => import('./regions/regions.page').then(m => m.RegionsPage)
+    loadComponent: () => import('./pages/regions/regions.page').then(m => m.RegionsPage)
   },
   {
     path: 'departments',
-    loadComponent: () => import('./departments/departments.page').then(m => m.DepartmentsPage)
+    loadComponent: () => import('./pages/departments/departments.page').then(m => m.DepartmentsPage)
   },
   {
     path: 'cities',
-    loadComponent: () => import('./cities/cities.page').then(m => m.CitiesPage)
+    loadComponent: () => import('./pages/cities/cities.page').then(m => m.CitiesPage)
   },
   {
     path: 'city-detail',
-    loadComponent: () => import('./city-detail/city-detail.page').then(m => m.CityDetailPage)
+    loadComponent: () => import('./pages/city-detail/city-detail.page').then(m => m.CityDetailPage)
   },
   {
     path: 'presidents',
-    loadComponent: () => import('./presidents/presidents.page').then(m => m.PresidentsPage)
+    loadComponent: () => import('./pages/presidents/presidents.page').then(m => m.PresidentsPage)
   },
   {
     path: 'department-detail',
-    loadComponent: () => import('./department-detail/department-detail.page').then(m => m.DepartmentDetailPage)
+    loadComponent: () => import('./pages/department-detail/department-detail.page').then(m => m.DepartmentDetailPage)
   },
   {
     path: 'airports',
-    loadComponent: () => import('./airports/airports.page').then(m => m.AirportsPage)
+    loadComponent: () => import('./pages/airports/airports.page').then(m => m.AirportsPage)
   },
   {
     path: 'airport-detail',
-    loadComponent: () => import('./airport-detail/airport-detail.page').then(m => m.AirportDetailPage)
+    loadComponent: () => import('./pages/airport-detail/airport-detail.page').then(m => m.AirportDetailPage)
   },
   {
     path: 'constitution-articles',
-    loadComponent: () => import('./constitution-articles/constitution-articles.page').then(m => m.ConstitutionArticlesPage)
+    loadComponent: () => import('./pages/constitution-articles/constitution-articles.page').then(m => m.ConstitutionArticlesPage)
   },
   {
     path: 'radio-stations',
-    loadComponent: () => import('./radio-stations/radio-stations.page').then(m => m.RadioStationsPage)
+    loadComponent: () => import('./pages/radio-stations/radio-stations.page').then(m => m.RadioStationsPage)
   },
   {
     path: 'radio-detail',
-    loadComponent: () => import('./radio-detail/radio-detail.page').then(m => m.RadioDetailPage)
+    loadComponent: () => import('./pages/radio-detail/radio-detail.page').then(m => m.RadioDetailPage)
   },
   {
     path: '**',

@@ -5,9 +5,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { Subscription, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { ApicolombiaService } from '../services/apicolombia.service';
-import { ToolsService } from '../services/tools.service';
-import { ConstitutionArticle } from '../interfaces/constitution-article.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
+import { ToolsService } from '../../core/services/tools.service';
+import { ConstitutionArticle } from '../../core/interfaces/constitution-article.interface';
 
 @Component({
   selector: 'app-constitution-articles',

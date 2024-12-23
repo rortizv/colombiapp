@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonNote, IonToolbar, IonButtons, IonMenuButton, IonAccordion, IonAccordionGroup, IonItem, LoadingController, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle, IonSearchbar } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 
-import { ApicolombiaService } from '../services/apicolombia.service';
-import { Department } from '../interfaces/department.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
+import { Department } from '../../core/interfaces/department.interface';
 
 @Component({
   selector: 'app-departments',

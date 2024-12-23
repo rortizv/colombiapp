@@ -5,12 +5,12 @@ import { IonContent, IonButton, IonHeader, IonTitle, IonToolbar, IonMenuButton, 
 import { Subject, firstValueFrom } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ApicolombiaService } from '../services/apicolombia.service';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
 
-import { Region } from '../interfaces/region.interface';
-import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../interfaces/department.interface';
+import { Region } from '../../core/interfaces/region.interface';
+import { Department, DepartmentDetail, DepartmentsByRegionResponse } from '../../core/interfaces/department.interface';
 import { Router } from '@angular/router';
-import { ToolsService } from '../services/tools.service';
+import { ToolsService } from '../../core/services/tools.service';
 
 @Component({
   selector: 'app-regions',

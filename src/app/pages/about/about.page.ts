@@ -2,8 +2,8 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonRow, IonCol } from '@ionic/angular/standalone';
-import { ColombiaInfo } from '../interfaces/colombia.interface';
-import { ApicolombiaService } from '../services/apicolombia.service';
+import { ColombiaInfo } from '../../core/interfaces/colombia.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
 import { Subscription } from 'rxjs';
 import { IonicSlides } from '@ionic/angular';
 

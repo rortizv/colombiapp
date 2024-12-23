@@ -8,8 +8,8 @@ import {
   IonCardTitle, IonCardSubtitle, IonAccordionGroup, IonAccordion, IonItem,
   IonLabel, IonNote, IonImg, IonAvatar
 } from '@ionic/angular/standalone';
-import { President } from '../interfaces/president.interface';
-import { ApicolombiaService } from '../services/apicolombia.service';
+import { President } from '../../core/interfaces/president.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({

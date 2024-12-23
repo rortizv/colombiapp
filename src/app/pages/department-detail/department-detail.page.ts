@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DepartmentDetail } from '../interfaces/department.interface';
+import { DepartmentDetail } from '../../core/interfaces/department.interface';
 
 @Component({
   selector: 'app-department-detail',

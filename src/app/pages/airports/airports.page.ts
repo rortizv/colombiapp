@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, LoadingController, IonSearchbar, IonList, IonItem, IonLabel, IonSpinner } from '@ionic/angular/standalone';
 import { Subscription } from 'rxjs';
-import { Airport } from '../interfaces/airport.interface';
-import { ApicolombiaService } from '../services/apicolombia.service';
-import { ToolsService } from '../services/tools.service';
+import { Airport } from '../../core/interfaces/airport.interface';
+import { ApicolombiaService } from '../../core/services/apicolombia.service';
+import { ToolsService } from '../../core/services/tools.service';
 
 @Component({
   selector: 'app-airports',
