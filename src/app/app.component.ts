@@ -1,24 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
   IonSplitPane,
-  IonMenu,
   IonRow,
-  IonCol,
-  IonContent,
-  IonList,
-  IonListHeader,
-  IonNote,
-  IonMenuToggle,
-  IonItem,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
-  IonHeader,
-  IonToolbar,
-  IonTitle
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -62,7 +48,7 @@ import {
   sparklesOutline,
   sparklesSharp
 } from 'ionicons/icons';
-import { MenuComponent } from './menu/menu.component';
+import { MenuComponent } from './shared/menu/menu.component';
 
 import { register } from 'swiper/element/bundle';
 import { injectSpeedInsights } from '@vercel/speed-insights';
@@ -76,25 +62,10 @@ injectSpeedInsights();
   styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
-    RouterLink,
-    IonHeader,
     IonRow,
-    IonCol,
-    IonToolbar,
-    IonTitle,
-    RouterLinkActive,
     CommonModule,
     IonApp,
     IonSplitPane,
-    IonMenu,
-    IonContent,
-    IonList,
-    IonListHeader,
-    IonNote,
-    IonMenuToggle,
-    IonItem,
-    IonIcon,
-    IonLabel,
     IonRouterOutlet,
     MenuComponent
   ],
