@@ -117,11 +117,22 @@ export class AppComponent {
       sparklesSharp
     });
     this.onResize({ target: window });
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    this.toggleDarkTheme(prefersDark.matches);
+
+    // Listen for changes to the prefers-color-scheme media query
+    prefersDark.addEventListener('change', (mediaQuery) => this.toggleDarkTheme(mediaQuery.matches));
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.isDesktop = event.target.innerWidth > 768;
+  }
+
+  // Add or remove the "dark" class on the document body
+  toggleDarkTheme(shouldAdd: boolean) {
+    document.body.classList.toggle('dark', shouldAdd);
   }
 
 }
