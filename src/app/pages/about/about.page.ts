@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonMenuButton, IonButtons, IonRow, IonCol } from '@ionic/angular/standalone';
@@ -28,6 +28,7 @@ import { IonicSlides } from '@ionic/angular';
 })
 export class AboutPage implements OnInit, OnDestroy {
 
+  private apiColombiaService = inject(ApicolombiaService);
   public swiperModules = [IonicSlides];
   public slides = [
     {
@@ -44,7 +45,7 @@ export class AboutPage implements OnInit, OnDestroy {
     },
   ];
 
-  public colombiaInfo: ColombiaInfo = {
+  public colombiaInfo = signal<ColombiaInfo>({
     id: 0,
     name: '',
     description: '',
@@ -65,11 +66,11 @@ export class AboutPage implements OnInit, OnDestroy {
     region: '',
     borders: [],
     flags: [],
-  };
+  });
 
   public getColombiaInfoSubscription: Subscription = new Subscription();
 
-  constructor(private apiColombiaService: ApicolombiaService) { }
+  constructor() { }
 
   ngOnInit() {
     this.getColombiaInfo();
@@ -79,7 +80,7 @@ export class AboutPage implements OnInit, OnDestroy {
     this.getColombiaInfoSubscription = this.apiColombiaService.getColombiaInfo()
       .subscribe({
         next: (data: ColombiaInfo) => {
-          this.colombiaInfo = data;
+          this.colombiaInfo.set(data);
         },
         error: (error: any) => {
           console.error('Error fetching Colombia info:', error);
