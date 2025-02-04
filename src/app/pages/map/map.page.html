@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mapa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="animate__animated animate__fadeInLeftBig animate__faster">
+  <div class="button-container">
+    <ion-button size="small" (click)="showUserLocation()">
+      <ion-icon slot="start" [icon]="locateIcon"></ion-icon>
+      Locate me
+    </ion-button>
+    <ion-button size="small" (click)="showManyUsersLocation()">
+      <ion-icon slot="start" [icon]="peopleIcon"></ion-icon>
+      Show users
+    </ion-button>
+    <ion-button size="small" (click)="removeAllUserMarkers()">
+      <ion-icon slot="start" [icon]="removeCircleIcon"></ion-icon>
+      Clear markers
+    </ion-button>
+    <ion-button size="small" (click)="addTrailRoutes()">
+      <ion-icon slot="start" [icon]="caretForwardIcon"></ion-icon>
+      Add trail routes
+    </ion-button>
+  </div>
+  <div id="map"></div>
+</ion-content>

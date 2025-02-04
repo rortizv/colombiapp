@@ -1,0 +1,21 @@
+#map {
+  height: 95%;
+  width: 100%;
+}
+
+ion-content {
+  --background: transparent;
+  /* Optional */
+  display: flex;
+  flex-direction: column;
+}
+
+ion-content>#map {
+  flex: 1;
+  /* Takes up all available space */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
